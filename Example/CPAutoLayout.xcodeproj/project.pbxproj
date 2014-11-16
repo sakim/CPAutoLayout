@@ -22,6 +22,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		F623637FD6342926C4BF437A /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F90D5EC0542DDD0850FEB3C9 /* libPods-Tests.a */; };
 		FB2B0F7A24EB937C36E5AAFA /* libPods-CPAutoLayout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FB457F663F077ED3864C2 /* libPods-CPAutoLayout.a */; };
+		FE193E041A18F0A300940CAD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE193E031A18F0A300940CAD /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		BFF59428BDCA80A7317829ED /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CE0FB457F663F077ED3864C2 /* libPods-CPAutoLayout.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CPAutoLayout.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90D5EC0542DDD0850FEB3C9 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE193E031A18F0A300940CAD /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				6003F59D195388D20070C39A /* CPAppDelegate.m */,
 				6003F5A5195388D20070C39A /* CPViewController.h */,
 				6003F5A6195388D20070C39A /* CPViewController.m */,
+				FE193E031A18F0A300940CAD /* LaunchScreen.xib */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				FE193E041A18F0A300940CAD /* LaunchScreen.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

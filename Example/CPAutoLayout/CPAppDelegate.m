@@ -17,10 +17,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     CPViewController *viewController = [[CPViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationController.navigationBar.translucent = NO;
-    
-    self.window.rootViewController = navigationController;
+    self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
