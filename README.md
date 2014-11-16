@@ -1,22 +1,25 @@
 # CPAutoLayout
 
-[![CI Status](http://img.shields.io/travis/Sung Ahn Kim/CPAutoLayout.svg?style=flat)](https://travis-ci.org/Sung Ahn Kim/CPAutoLayout)
-[![Version](https://img.shields.io/cocoapods/v/CPAutoLayout.svg?style=flat)](http://cocoadocs.org/docsets/CPAutoLayout)
-[![License](https://img.shields.io/cocoapods/l/CPAutoLayout.svg?style=flat)](http://cocoadocs.org/docsets/CPAutoLayout)
-[![Platform](https://img.shields.io/cocoapods/p/CPAutoLayout.svg?style=flat)](http://cocoadocs.org/docsets/CPAutoLayout)
+CPAutoLayout is a position-based AutoLayout shorthand. It doesn't cover all of AutoLayout constraints. Instead, it only focus common use cases.
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+A simple example in which you want to have a view with 100x100 size fit into superview's right upper corner.
 
-## Requirements
+```obj-c
+[view setConstraints:^(CPConstraintsBuilder *builder) {
+        builder.position(CPAlignmentTop|CPAlignmentRight)
+               .toItem(superview);
+        builder.size(CGSizeMake(100, 100));
+    }];
+```
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Installation
 
-CPAutoLayout is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the following to your project Podfile:
 
-    pod "CPAutoLayout"
+>`pod 'CPAutoLayout'`
 
 ## Author
 

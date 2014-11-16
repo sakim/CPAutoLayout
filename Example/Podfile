@@ -2,10 +2,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'CPAutoLayout', :exclusive => true do
   pod "CPAutoLayout", :path => "../"
+  pod 'Masonry'
 end
 
 target 'Tests', :exclusive => true do
   pod "CPAutoLayout", :path => "../"
+  pod 'Masonry'
 
   pod 'Specta', '~> 0.2.1'
   pod 'Expecta'
