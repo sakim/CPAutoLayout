@@ -28,7 +28,7 @@
     view.backgroundColor = [UIColor redColor];
     [self.view addSubview:view];
     [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop|CPAlignmentLeft).toItem(self.view);
+        builder.position(CPAlignmentTop|CPAlignmentLeft); // .toItem(superview)
         builder.size(size);
     }];
     

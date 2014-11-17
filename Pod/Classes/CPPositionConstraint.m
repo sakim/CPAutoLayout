@@ -51,45 +51,42 @@
 
 - (void)update:(MASConstraintMaker *)make
 {
-    if (_position == CPPositionCenter) {
-        make.centerX.equalTo(_item.mas_centerX).with.offset(_offset.width).priorityLow();
-        make.centerY.equalTo(_item.mas_centerY).with.offset(_offset.height).priorityLow();
-    } else { // default: center alignment
-        make.centerX.equalTo(_item.mas_centerX).with.priorityLow();
-        make.centerY.equalTo(_item.mas_centerY).with.priorityLow();
-    }
+    UIView *item = (_item != nil) ? _item : self.target.superview;
+    // default center
+    make.centerX.equalTo(item.mas_centerX).with.offset(_offset.width).priorityLow();
+    make.centerY.equalTo(item.mas_centerY).with.offset(_offset.height).priorityLow();
 
     // position
     if (_position & CPPositionTop) {
-        make.bottom.equalTo(_item.mas_top).with.offset(-_offset.height);
+        make.bottom.equalTo(item.mas_top).with.offset(-_offset.height);
     }
 
     if (_position & CPPositionRight) {
-        make.left.equalTo(_item.mas_right).with.offset(_offset.width);
+        make.left.equalTo(item.mas_right).with.offset(_offset.width);
     }
 
     if (_position & CPPositionBottom) {
-        make.top.equalTo(_item.mas_bottom).with.offset(_offset.height);
+        make.top.equalTo(item.mas_bottom).with.offset(_offset.height);
     }
 
     if (_position & CPPositionLeft) {
-        make.right.equalTo(_item.mas_left).with.offset(-_offset.width);
+        make.right.equalTo(item.mas_left).with.offset(-_offset.width);
     }
 
     if (_position & CPAlignmentLeft) {
-        make.left.equalTo(_item.mas_left).with.offset(_offset.width);
+        make.left.equalTo(item.mas_left).with.offset(_offset.width);
     }
 
     if (_position & CPAlignmentRight) {
-        make.right.equalTo(_item.mas_right).with.offset(-_offset.width);
+        make.right.equalTo(item.mas_right).with.offset(-_offset.width);
     }
 
     if (_position & CPAlignmentTop) {
-        make.top.equalTo(_item.mas_top).with.offset(_offset.height);
+        make.top.equalTo(item.mas_top).with.offset(_offset.height);
     }
 
     if (_position & CPAlignmentBottom) {
-        make.bottom.equalTo(_item.mas_bottom).with.offset(-_offset.height);
+        make.bottom.equalTo(item.mas_bottom).with.offset(-_offset.height);
     }
 }
 
