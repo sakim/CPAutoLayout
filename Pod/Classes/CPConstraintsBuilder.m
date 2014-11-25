@@ -12,6 +12,7 @@
 #import "CPPositionConstraint.h"
 #import "CPAspectRatioConstraint.h"
 #import "CPRelativeSizeConstraint.h"
+#import "CPInsetsConstraint.h"
 
 
 @interface CPConstraintsBuilder()
@@ -110,6 +111,16 @@
 {
     return ^id(UIView *relative) {
         CPRelativeSizeConstraint *constraint = [[CPRelativeSizeConstraint alloc] initWithRelativeHeight:relative];
+        [_constraints addObject:constraint];
+        return constraint;
+    };
+}
+
+
+- (CPInsetsConstraint *(^)(UIEdgeInsets insets))insets
+{
+    return ^id(UIEdgeInsets insets) {
+        CPInsetsConstraint *constraint = [[CPInsetsConstraint alloc] initWithInsets:insets];
         [_constraints addObject:constraint];
         return constraint;
     };

@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         _position = position;
+        _offset = CGSizeZero;
     }
     return self;
 }
@@ -44,6 +45,26 @@
 {
     return ^id(CGSize offset) {
         self.offset = offset;
+        return self;
+    };
+}
+
+
+- (CPPositionConstraint *(^)(CGFloat offsetX))withOffsetX
+{
+    return ^CPPositionConstraint *(CGFloat offsetX) {
+        CGSize offset = self.offset;
+        self.offset = CGSizeMake(offsetX, offset.height);
+        return self;
+    };
+}
+
+
+- (CPPositionConstraint *(^)(CGFloat offsetY))withOffsetY
+{
+    return ^CPPositionConstraint *(CGFloat offsetY) {
+        CGSize offset = self.offset;
+        self.offset = CGSizeMake(offset.width, offsetY);
         return self;
     };
 }

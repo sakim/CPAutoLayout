@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "CPAutoLayout"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "position-based AutoLayout shorthand"
   s.description      = <<-DESC
                        CPAutoLayout is a position-based AutoLayout shorthand.
@@ -25,9 +25,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'
-  s.resource_bundles = {
-    'CPAutoLayout' => ['Pod/Assets/*.png']
-  }
+  # s.resource_bundles = {
+  #   'CPAutoLayout' => ['Pod/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

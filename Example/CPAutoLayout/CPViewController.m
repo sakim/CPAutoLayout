@@ -99,14 +99,13 @@
         builder.position(CPPositionRight).toItem(bottomCenter).withOffset(CGSizeMake(5, 0));
         builder.relativeHeight(bottomCenter);
     }];
-    
+
     UIView *centerTop = [[UIView alloc] init];
     centerTop.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:centerTop];
     [centerTop setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionCenter|CPAlignmentTop).toItem(center).withOffset(CGSizeMake(0, 5));
+        builder.insets(UIEdgeInsetsMake(5, 0, NAN, 0)).toItem(center);
         builder.height(20);
-        builder.relativeWidth(center).withSizeOffset(CGSizeMake(-10, 0));
     }];
     
     UIView *aspectView = [[UIView alloc] init];

@@ -12,6 +12,7 @@
 @class CPPositionConstraint;
 @class CPAspectRatioConstraint;
 @class CPRelativeSizeConstraint;
+@class CPInsetsConstraint;
 
 
 @interface CPConstraintsBuilder : NSObject
@@ -26,6 +27,7 @@
 - (CPRelativeSizeConstraint * (^)(UIView *relative))relativeSize;
 - (CPRelativeSizeConstraint * (^)(UIView *relative))relativeWidth;
 - (CPRelativeSizeConstraint * (^)(UIView *relative))relativeHeight;
+- (CPInsetsConstraint * (^)(UIEdgeInsets insets))insets;
 
 - (void)build;
 - (void)update;

@@ -11,4 +11,5 @@
 #import "CPConstraintsBuilder.h"
 #import "CPPositionConstraint.h"
 #import "CPRelativeSizeConstraint.h"
+#import "CPInsetsConstraint.h"
 #import "CPAspectRatioConstraint.h"

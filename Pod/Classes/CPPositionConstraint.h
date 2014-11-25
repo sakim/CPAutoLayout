@@ -15,5 +15,7 @@
 
 - (CPPositionConstraint * (^)(UIView *item))toItem;
 - (CPPositionConstraint * (^)(CGSize offset))withOffset;
+- (CPPositionConstraint * (^)(CGFloat offsetX))withOffsetX;
+- (CPPositionConstraint * (^)(CGFloat offsetY))withOffsetY;
 
 @end
