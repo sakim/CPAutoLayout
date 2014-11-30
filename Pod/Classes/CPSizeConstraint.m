@@ -14,41 +14,89 @@
 
 @property (nonatomic, assign) CGSize size;
 
+// relative size
+@property (nonatomic, strong) UIView *item;
+@property (nonatomic, assign) CGSize offset;
+@property (nonatomic, assign) CGFloat multiplier;
+
 @end
 
 
 @implementation CPSizeConstraint
 
-- (instancetype)initWithSize:(CGSize)size
+
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        _size = size;
+        _size = CGSizeZero;
+        _multiplier = 1.f;
     }
 
     return self;
 }
 
 
-- (instancetype)initWithWidth:(CGFloat)width
+- (CPSizeConstraint *(^)(CGSize size))value
 {
-    return [self initWithSize:CGSizeMake(width, NAN)];
+    return ^CPSizeConstraint *(CGSize size) {
+        self.size = size;
+        return self;
+    };
 }
 
 
-- (instancetype)initWithHeight:(CGFloat)height
+- (CPSizeConstraint * (^)(UIView *item))toItem
 {
-    return [self initWithSize:CGSizeMake(NAN, height)];
+    return ^CPSizeConstraint *(UIView *toItem) {
+        self.item = toItem;
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize offset))withOffset
+{
+    return ^CPSizeConstraint *(CGSize offset) {
+        self.offset = offset;
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGFloat offsetX))withOffsetX
+{
+    return ^CPSizeConstraint *(CGFloat offsetX) {
+        self.offset = CGSizeMake(offsetX, self.offset.height);
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGFloat offsetX))withOffsetY
+{
+    return ^CPSizeConstraint *(CGFloat offsetY) {
+        self.offset = CGSizeMake(self.offset.width, offsetY);
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGFloat multiplier))multipliedBy {
+    return ^CPSizeConstraint *(CGFloat multiplier) {
+        self.multiplier = multiplier;
+        return self;
+    };
 }
 
 
 - (void)update:(MASConstraintMaker *)make
 {
-    if (!isnan(_size.width)) {
-        make.width.equalTo(@(_size.width));
-    }
-    if (!isnan(_size.height)) {
-        make.height.equalTo(@(_size.height));
+    if (self.item) {
+        make.size.equalTo(self.item).multipliedBy(self.multiplier).sizeOffset(self.offset);
+    } else {
+        make.width.equalTo(@(self.size.width));
+        make.height.equalTo(@(self.size.height));
     }
 }
 

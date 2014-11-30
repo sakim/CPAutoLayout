@@ -10,9 +10,9 @@
 
 @class CPSizeConstraint;
 @class CPPositionConstraint;
-@class CPAspectRatioConstraint;
-@class CPRelativeSizeConstraint;
 @class CPInsetsConstraint;
+@class CPWidthConstraint;
+@class CPHeightConstraint;
 
 
 @interface CPConstraintsBuilder : NSObject
@@ -20,13 +20,9 @@
 - (id)initWithView:(UIView *)view;
 
 - (CPPositionConstraint * (^)(CPPosition position))position;
-- (CPSizeConstraint * (^)(CGSize size))size;
-- (CPSizeConstraint * (^)(CGFloat width))width;
-- (CPSizeConstraint * (^)(CGFloat height))height;
-- (CPAspectRatioConstraint * (^)(CGFloat aspectRatio))aspectRatio;
-- (CPRelativeSizeConstraint * (^)(UIView *relative))relativeSize;
-- (CPRelativeSizeConstraint * (^)(UIView *relative))relativeWidth;
-- (CPRelativeSizeConstraint * (^)(UIView *relative))relativeHeight;
+- (CPSizeConstraint *)size;
+- (CPWidthConstraint *)width;
+- (CPHeightConstraint *)height;
 - (CPInsetsConstraint * (^)(UIEdgeInsets insets))insets;
 
 - (void)build;

@@ -7,136 +7,69 @@
 //
 
 #import "CPViewController.h"
-#import "CPAutoLayout.h"
+#import "CPPositionsViewController.h"
+#import "CPAlignmentsViewController.h"
+#import "CPAlignments2ViewController.h"
+#import "CPInsetsViewController.h"
+#import "CPSizeViewController.h"
+
 
 @interface CPViewController ()
 
-@property (nonatomic, weak) UIView *center;
-@property (nonatomic, assign) CGSize centerSize;
+@property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) NSArray *viewControllers;
 
 @end
 
 @implementation CPViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.title = @"CPAutoLayout";
+        _titles = @[@"Basic - Positions", @"Basic - Alignments (1)", @"Basic - Alignments (2)", @"Basic - Insets", @"Basic - Size"];
+        _viewControllers = @[
+                [[CPPositionsViewController alloc] init],
+                [[CPAlignmentsViewController alloc] init],
+                [[CPAlignments2ViewController alloc] init],
+                [[CPInsetsViewController alloc] init],
+                [[CPSizeViewController alloc] init]
+        ];
+    }
+
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    CGSize size = CGSizeMake(50, 50);
-    
-    // top left
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
-    [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop|CPAlignmentLeft); // .toItem(superview)
-        builder.size(size);
-    }];
-    
-    // top right
-    view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
-    [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop|CPAlignmentRight).toItem(self.view).withOffset(CGSizeMake(10, 10));
-        builder.size(size);
-    }];
-    
-    // bottom left
-    view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
-    [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentBottom|CPAlignmentLeft).toItem(self.view).withOffset(CGSizeMake(30, 30));
-        builder.size(size);
-    }];
-    
-    // bottom right
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setTitle:@"!!!" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(enlarge:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
-    [button setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentBottom|CPAlignmentRight).toItem(self.view).withOffset(CGSizeMake(20, 20));
-        builder.size(size);
-    }];
-    
-    // center
-    UIView *center = [[UIView alloc] init];
-    center.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:center];
-    
-    _center = center;
-    _centerSize = CGSizeMake(70, 70);
-    
-    [center setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionCenter).toItem(self.view).withOffset(CGSizeMake(20, 20));
-        builder.size(_centerSize);
-    }];
-    
-    UIView *bottomCenter = [[UIView alloc] init];
-    bottomCenter.backgroundColor = [UIColor yellowColor];
-    [self.view addSubview:bottomCenter];
-    [bottomCenter setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionBottom).toItem(center).withOffset(CGSizeMake(0, 5));
-        builder.relativeSize(center).multipliedBy(1/3.f).withSizeOffset(CGSizeMake(-3.33f, 0));
-    }];
-    
-    UIView *bottomLeft = [[UIView alloc] init];
-    bottomLeft.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:bottomLeft];
-    [bottomLeft setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionBottom|CPAlignmentLeft).toItem(center).withOffset(CGSizeMake(0, 5));
-        builder.position(CPPositionLeft).toItem(bottomCenter).withOffset(CGSizeMake(5, 0));
-        builder.relativeHeight(bottomCenter);
-    }];
-    
-    UIView *bottomRight = [[UIView alloc] init];
-    bottomRight.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:bottomRight];
-    [bottomRight setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionBottom|CPAlignmentRight).toItem(center).withOffset(CGSizeMake(0, 5));
-        builder.position(CPPositionRight).toItem(bottomCenter).withOffset(CGSizeMake(5, 0));
-        builder.relativeHeight(bottomCenter);
-    }];
-
-    UIView *centerTop = [[UIView alloc] init];
-    centerTop.backgroundColor = [UIColor yellowColor];
-    [self.view addSubview:centerTop];
-    [centerTop setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.insets(UIEdgeInsetsMake(5, 0, NAN, 0)).toItem(center);
-        builder.height(20);
-    }];
-    
-    UIView *aspectView = [[UIView alloc] init];
-    aspectView.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:aspectView];
-    [aspectView setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop).toItem(self.view).withOffset(CGSizeMake(0, 20));
-        builder.relativeHeight(center).multipliedBy(0.3f);
-        builder.aspectRatio(1.6f);
-    }];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 
-- (void)enlarge:(id)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.titles.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *reuseIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+
+    cell.textLabel.text = _titles[indexPath.row];
+
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        _centerSize = CGSizeMake(_centerSize.width + 30, _centerSize.height + 20);
-        [_center updateConstraints:^(CPConstraintsBuilder *builder) {
-            builder.size(_centerSize);
-        }];
-        
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
-    }];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:_viewControllers[indexPath.row] animated:YES];
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

@@ -11,8 +11,13 @@
 
 @interface CPSizeConstraint : CPLayoutConstraint
 
-- (instancetype)initWithSize:(CGSize)size;
-- (instancetype)initWithWidth:(CGFloat)width;
-- (instancetype)initWithHeight:(CGFloat)height;
+
+- (CPSizeConstraint * (^)(CGSize size))value;
+- (CPSizeConstraint * (^)(UIView *item))toItem;
+- (CPSizeConstraint * (^)(CGSize offset))withOffset;
+- (CPSizeConstraint * (^)(CGFloat offsetX))withOffsetX;
+- (CPSizeConstraint * (^)(CGFloat offsetY))withOffsetY;
+- (CPSizeConstraint * (^)(CGFloat multiplier))multipliedBy;
+
 
 @end

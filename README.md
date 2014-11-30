@@ -10,7 +10,7 @@ A simple example in which you want to have a view with 100x100 size fit into sup
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentRight)
                .toItem(superview);
-        builder.size(CGSizeMake(100, 100));
+        builder.size.value(CGSizeMake(100, 100));
     }];
 ```
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

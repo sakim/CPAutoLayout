@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPViewController : UIViewController
+@interface CPViewController : UITableViewController
 
 @end

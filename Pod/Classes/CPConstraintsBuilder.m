@@ -8,10 +8,10 @@
 
 #import "CPConstraintsBuilder.h"
 #import "Masonry.h"
-#import "CPSizeConstraint.h"
 #import "CPPositionConstraint.h"
-#import "CPAspectRatioConstraint.h"
-#import "CPRelativeSizeConstraint.h"
+#import "CPSizeConstraint.h"
+#import "CPWidthConstraint.h"
+#import "CPHeightConstraint.h"
 #import "CPInsetsConstraint.h"
 
 
@@ -47,73 +47,27 @@
 }
 
 
-- (CPSizeConstraint * (^)(CGSize size))size
+- (CPSizeConstraint *)size
 {
-    return ^id(CGSize size) {
-        CPSizeConstraint *constraint = [[CPSizeConstraint alloc] initWithSize:size];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
+    CPSizeConstraint *constraint = [[CPSizeConstraint alloc] init];
+    [_constraints addObject:constraint];
+    return constraint;
 }
 
 
-- (CPSizeConstraint * (^)(CGFloat width))width
+- (CPWidthConstraint *)width
 {
-    return ^id(CGFloat width) {
-        CPSizeConstraint *constraint = [[CPSizeConstraint alloc] initWithWidth:width];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
+    CPWidthConstraint *constraint = [[CPWidthConstraint alloc] init];
+    [_constraints addObject:constraint];
+    return constraint;
 }
 
 
-- (CPSizeConstraint * (^)(CGFloat height))height
+- (CPHeightConstraint *)height
 {
-    return ^id(CGFloat height) {
-        CPSizeConstraint *constraint = [[CPSizeConstraint alloc] initWithHeight:height];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
-}
-
-
-- (CPAspectRatioConstraint *(^)(CGFloat aspectRatio))aspectRatio
-{
-    return ^id(CGFloat aspectRatio) {
-        CPAspectRatioConstraint *constraint = [[CPAspectRatioConstraint alloc] initWithAspectRatio:aspectRatio];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
-}
-
-
-- (CPRelativeSizeConstraint *(^)(UIView *relative))relativeSize
-{
-    return ^id(UIView *relative) {
-        CPRelativeSizeConstraint *constraint = [[CPRelativeSizeConstraint alloc] initWithRelativeSize:relative];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
-}
-
-
-- (CPRelativeSizeConstraint *(^)(UIView *relative))relativeWidth
-{
-    return ^id(UIView *relative) {
-        CPRelativeSizeConstraint *constraint = [[CPRelativeSizeConstraint alloc] initWithRelativeWidth:relative];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
-}
-
-
-- (CPRelativeSizeConstraint *(^)(UIView *relative))relativeHeight
-{
-    return ^id(UIView *relative) {
-        CPRelativeSizeConstraint *constraint = [[CPRelativeSizeConstraint alloc] initWithRelativeHeight:relative];
-        [_constraints addObject:constraint];
-        return constraint;
-    };
+    CPHeightConstraint *constraint = [[CPHeightConstraint alloc] init];
+    [_constraints addObject:constraint];
+    return constraint;
 }
 
 
