@@ -60,6 +60,7 @@ Position offset is a distance from its anchor point.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.size.value(CGSizeMake(100, 100));
+        builder.position(...);
     }];
 ```
 
@@ -67,6 +68,7 @@ Position offset is a distance from its anchor point.
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.width.value(100);
         builder.height.value(100);
+        builder.position(...);
     }];
 ```
 #### Relative Size
@@ -76,6 +78,7 @@ Size equal to a item.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.size.toItem(aView);
+        builder.position(...);
     }];
 ```
 
@@ -85,6 +88,7 @@ Width equal to a item's width, and has fixed height.
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.width.toItem(aView);
         builder.height.value(50);
+        builder.position(...);
     }];
 ```
 
@@ -93,6 +97,7 @@ View has always half size to a item.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.size.toItem(aView).multipliedBy(.5f);
+        builder.position(...);
     }];
 ```
 
@@ -101,6 +106,7 @@ Size offset is size difference to a item.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.size.toItem(aView).withOffset(CGSiMake(10, 10));
+        builder.position(...);
     }];
 ```
 #### Size with Aspect Ratio
@@ -111,6 +117,7 @@ Keep 2:1 aspect ratio.
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.width.aspectRatio(2);
         builder.height.value(50);
+        builder.position(...);
     }];
 ```
 
@@ -120,6 +127,7 @@ Same as,
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.width.value(100);
         builder.height.aspectRatio(.5f);
+        builder.position(...);
     }];
 ```
 ### Insets
@@ -129,6 +137,7 @@ Usually used to represent background view.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+        builder.position(...);
     }];
 ```
 
