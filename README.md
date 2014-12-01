@@ -137,7 +137,6 @@ Usually used to represent background view.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.insets(UIEdgeInsetsMake(10, 10, 10, 10));
-        builder.position(...);
     }];
 ```
 
