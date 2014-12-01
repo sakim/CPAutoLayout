@@ -17,7 +17,7 @@
 @property (nonatomic, assign) CGFloat width;
 
 // relative width
-@property (nonatomic, strong) UIView *item;
+@property (nonatomic, weak) UIView *item;
 @property (nonatomic, assign) CGFloat offsetX;
 @property (nonatomic, assign) CGFloat multiplier;
 @property (nonatomic, assign) CGFloat aspect;

@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) CPPosition position;
 @property (nonatomic, assign) CGSize offset;
-@property (nonatomic, strong) UIView *item;
+@property (nonatomic, weak) UIView *item;
 
 @end
 

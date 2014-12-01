@@ -12,7 +12,7 @@
 @interface CPInsetsConstraint ()
 
 @property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, strong) UIView *item;
+@property (nonatomic, weak) UIView *item;
 
 @end
 

@@ -16,7 +16,7 @@
 @property (nonatomic, assign) CGFloat height;
 
 // relative height
-@property (nonatomic, strong) UIView *item;
+@property (nonatomic, weak) UIView *item;
 @property (nonatomic, assign) CGFloat offsetY;
 @property (nonatomic, assign) CGFloat multiplier;
 @property (nonatomic, assign) CGFloat aspect;

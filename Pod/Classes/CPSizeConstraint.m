@@ -15,7 +15,7 @@
 @property (nonatomic, assign) CGSize size;
 
 // relative size
-@property (nonatomic, strong) UIView *item;
+@property (nonatomic, weak) UIView *item;
 @property (nonatomic, assign) CGSize offset;
 @property (nonatomic, assign) CGFloat multiplier;
 
