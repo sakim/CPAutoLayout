@@ -89,7 +89,7 @@
     if (self.item) {
         make.width.equalTo(self.item.mas_width).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(self.offsetX, 0));
     } else if (self.aspect != 0) {
-        make.width.equalTo(self.target.mas_height).with.multipliedBy(self.aspect);
+        make.width.equalTo(self.target.mas_height).with.multipliedBy(self.aspect).sizeOffset(CGSizeMake(self.offsetX, 0));
     } else {
         make.width.equalTo(@(self.width));
     }
