@@ -13,6 +13,7 @@
 @interface CPSizeConstraint ()
 
 @property (nonatomic, assign) CGSize size;
+@property (nonatomic, assign) NSLayoutRelation relation;
 
 // relative size
 @property (nonatomic, weak) UIView *item;
@@ -40,6 +41,27 @@
 - (CPSizeConstraint *(^)(CGSize size))value
 {
     return ^CPSizeConstraint *(CGSize size) {
+        self.relation = NSLayoutRelationEqual;
+        self.size = size;
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize size))less
+{
+    return ^CPSizeConstraint *(CGSize size) {
+        self.relation = NSLayoutRelationLessThanOrEqual;
+        self.size = size;
+        return self;
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize size))greater
+{
+    return ^CPSizeConstraint *(CGSize size) {
+        self.relation = NSLayoutRelationGreaterThanOrEqual;
         self.size = size;
         return self;
     };
@@ -95,8 +117,16 @@
     if (self.item) {
         make.size.equalTo(self.item).multipliedBy(self.multiplier).sizeOffset(self.offset);
     } else {
-        make.width.equalTo(@(self.size.width));
-        make.height.equalTo(@(self.size.height));
+        if (self.relation == NSLayoutRelationEqual) {
+            make.width.equalTo(@(self.size.width));
+            make.height.equalTo(@(self.size.height));
+        } else if (self.relation == NSLayoutRelationGreaterThanOrEqual) {
+            make.width.greaterThanOrEqualTo(@(self.size.width));
+            make.height.greaterThanOrEqualTo(@(self.size.height));
+        } else if (self.relation == NSLayoutRelationLessThanOrEqual) {
+            make.width.lessThanOrEqualTo(@(self.size.width));
+            make.height.lessThanOrEqualTo(@(self.size.height));
+        }
     }
 }
 

@@ -11,7 +11,10 @@
 
 @interface CPWidthConstraint : CPLayoutConstraint
 
-- (CPWidthConstraint * (^)(CGFloat height))value;
+- (CPWidthConstraint * (^)(CGFloat width))value;
+- (CPWidthConstraint * (^)(CGFloat width))less;
+- (CPWidthConstraint * (^)(CGFloat width))greater;
+
 - (CPWidthConstraint * (^)(UIView *item))toItem;
 - (CPWidthConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPWidthConstraint * (^)(CGFloat multiplier))multipliedBy;

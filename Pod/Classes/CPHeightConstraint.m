@@ -14,6 +14,7 @@
 @interface CPHeightConstraint ()
 
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) NSLayoutRelation relation;
 
 // relative height
 @property (nonatomic, weak) UIView *item;
@@ -40,6 +41,27 @@
 - (CPHeightConstraint *(^)(CGFloat height))value
 {
     return ^CPHeightConstraint *(CGFloat height) {
+        self.relation = NSLayoutRelationEqual;
+        self.height = height;
+        return self;
+    };
+}
+
+
+- (CPHeightConstraint *(^)(CGFloat height))less
+{
+    return ^CPHeightConstraint *(CGFloat height) {
+        self.relation = NSLayoutRelationLessThanOrEqual;
+        self.height = height;
+        return self;
+    };
+}
+
+
+- (CPHeightConstraint *(^)(CGFloat height))greater
+{
+    return ^CPHeightConstraint *(CGFloat height) {
+        self.relation = NSLayoutRelationGreaterThanOrEqual;
         self.height = height;
         return self;
     };
@@ -89,7 +111,13 @@
     } else if (self.aspect != 0) {
         make.height.equalTo(self.target.mas_width).with.multipliedBy(self.aspect).sizeOffset(CGSizeMake(0, self.offsetY));
     } else {
-        make.height.equalTo(@(self.height));
+        if (self.relation == NSLayoutRelationEqual) {
+            make.height.equalTo(@(self.height));
+        } else if (self.relation == NSLayoutRelationGreaterThanOrEqual) {
+            make.height.greaterThanOrEqualTo(@(self.height));
+        } else if (self.relation == NSLayoutRelationLessThanOrEqual) {
+            make.height.lessThanOrEqualTo(@(self.height));
+        }
     }
 }
 

@@ -15,6 +15,7 @@
 @interface CPWidthConstraint ()
 
 @property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) NSLayoutRelation relation;
 
 // relative width
 @property (nonatomic, weak) UIView *item;
@@ -39,9 +40,30 @@
 }
 
 
-- (CPWidthConstraint *(^)(CGFloat height))value
+- (CPWidthConstraint *(^)(CGFloat width))value
 {
     return ^CPWidthConstraint *(CGFloat width) {
+        self.relation = NSLayoutRelationEqual;
+        self.width = width;
+        return self;
+    };
+}
+
+
+- (CPWidthConstraint *(^)(CGFloat width))less
+{
+    return ^CPWidthConstraint *(CGFloat width) {
+        self.relation = NSLayoutRelationLessThanOrEqual;
+        self.width = width;
+        return self;
+    };
+}
+
+
+- (CPWidthConstraint *(^)(CGFloat width))greater
+{
+    return ^CPWidthConstraint *(CGFloat width) {
+        self.relation = NSLayoutRelationGreaterThanOrEqual;
         self.width = width;
         return self;
     };
@@ -91,7 +113,13 @@
     } else if (self.aspect != 0) {
         make.width.equalTo(self.target.mas_height).with.multipliedBy(self.aspect).sizeOffset(CGSizeMake(self.offsetX, 0));
     } else {
-        make.width.equalTo(@(self.width));
+        if (self.relation == NSLayoutRelationEqual) {
+            make.width.equalTo(@(self.width));
+        } else if (self.relation == NSLayoutRelationGreaterThanOrEqual) {
+            make.width.greaterThanOrEqualTo(@(self.width));
+        } else if (self.relation == NSLayoutRelationLessThanOrEqual) {
+            make.width.lessThanOrEqualTo(@(self.width));
+        }
     }
 }
 

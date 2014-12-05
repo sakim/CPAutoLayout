@@ -13,6 +13,9 @@
 
 
 - (CPSizeConstraint * (^)(CGSize size))value;
+- (CPSizeConstraint * (^)(CGSize size))less;
+- (CPSizeConstraint * (^)(CGSize size))greater;
+
 - (CPSizeConstraint * (^)(UIView *item))toItem;
 - (CPSizeConstraint * (^)(CGSize offset))withOffset;
 - (CPSizeConstraint * (^)(CGFloat offsetX))withOffsetX;
