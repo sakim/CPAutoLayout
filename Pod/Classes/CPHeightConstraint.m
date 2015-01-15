@@ -7,8 +7,8 @@
 //
 
 #import "CPHeightConstraint.h"
-
 #import "Masonry.h"
+#import "MASConstraint+Private.h"
 
 
 @interface CPHeightConstraint ()
@@ -32,6 +32,7 @@
     self = [super init];
     if (self) {
         _multiplier = 1.f;
+        _relation = NSLayoutRelationEqual;
     }
 
     return self;
@@ -41,27 +42,6 @@
 - (CPHeightConstraint *(^)(CGFloat height))value
 {
     return ^CPHeightConstraint *(CGFloat height) {
-        self.relation = NSLayoutRelationEqual;
-        self.height = height;
-        return self;
-    };
-}
-
-
-- (CPHeightConstraint *(^)(CGFloat height))less
-{
-    return ^CPHeightConstraint *(CGFloat height) {
-        self.relation = NSLayoutRelationLessThanOrEqual;
-        self.height = height;
-        return self;
-    };
-}
-
-
-- (CPHeightConstraint *(^)(CGFloat height))greater
-{
-    return ^CPHeightConstraint *(CGFloat height) {
-        self.relation = NSLayoutRelationGreaterThanOrEqual;
         self.height = height;
         return self;
     };
@@ -104,20 +84,41 @@
 }
 
 
+- (CPHeightConstraint *(^)())equal
+{
+    return ^CPHeightConstraint *() {
+        self.relation = NSLayoutRelationEqual;
+        return self;
+    };
+}
+
+
+- (CPHeightConstraint *(^)())less
+{
+    return ^CPHeightConstraint *() {
+        self.relation = NSLayoutRelationLessThanOrEqual;
+        return self;
+    };
+}
+
+
+- (CPHeightConstraint *(^)())greater
+{
+    return ^CPHeightConstraint *() {
+        self.relation = NSLayoutRelationGreaterThanOrEqual;
+        return self;
+    };
+}
+
+
 - (void)update:(MASConstraintMaker *)make
 {
     if (self.item) {
-        make.height.equalTo(self.item.mas_height).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(0, self.offsetY));
+        make.height.equalToWithRelation(self.item.mas_height, self.relation).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(0, self.offsetY));
     } else if (self.aspect != 0) {
-        make.height.equalTo(self.target.mas_width).with.multipliedBy(self.aspect).sizeOffset(CGSizeMake(0, self.offsetY));
+        make.height.equalToWithRelation(self.target.mas_width, self.relation).multipliedBy(self.aspect).sizeOffset(CGSizeMake(0, self.offsetY));
     } else {
-        if (self.relation == NSLayoutRelationEqual) {
-            make.height.equalTo(@(self.height));
-        } else if (self.relation == NSLayoutRelationGreaterThanOrEqual) {
-            make.height.greaterThanOrEqualTo(@(self.height));
-        } else if (self.relation == NSLayoutRelationLessThanOrEqual) {
-            make.height.lessThanOrEqualTo(@(self.height));
-        }
+        make.height.equalToWithRelation(@(self.height), self.relation);
     }
 }
 

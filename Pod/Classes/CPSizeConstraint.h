@@ -11,10 +11,7 @@
 
 @interface CPSizeConstraint : CPLayoutConstraint
 
-
 - (CPSizeConstraint * (^)(CGSize size))value;
-- (CPSizeConstraint * (^)(CGSize size))less;
-- (CPSizeConstraint * (^)(CGSize size))greater;
 
 - (CPSizeConstraint * (^)(UIView *item))toItem;
 - (CPSizeConstraint * (^)(CGSize offset))withOffset;
@@ -22,5 +19,9 @@
 - (CPSizeConstraint * (^)(CGFloat offsetY))withOffsetY;
 - (CPSizeConstraint * (^)(CGFloat multiplier))multipliedBy;
 
+// relations
+- (CPSizeConstraint * (^)())equal;
+- (CPSizeConstraint * (^)())less;
+- (CPSizeConstraint * (^)())greater;
 
 @end
