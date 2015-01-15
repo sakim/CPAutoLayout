@@ -18,7 +18,13 @@
 @interface CPConstraintsBuilder()
 
 @property (nonatomic, weak) UIView *view;
-@property (nonatomic, strong) NSMutableArray *constraints;
+
+@property (nonatomic, strong) CPPositionConstraint *positionConstraint;
+@property (nonatomic, strong) CPPositionConstraint *toPositionConstraint;
+@property (nonatomic, strong) CPSizeConstraint *sizeConstraint;
+@property (nonatomic, strong) CPWidthConstraint *widthConstraint;
+@property (nonatomic, strong) CPHeightConstraint *heightConstraint;
+@property (nonatomic, strong) CPInsetsConstraint *insetsConstraint;
 
 @end
 
@@ -30,7 +36,6 @@
     self = [super init];
     if (self) {
         _view = view;
-        _constraints = [[NSMutableArray alloc] init];
     }
 
     return self;
@@ -41,7 +46,17 @@
 {
     return ^id(CPPosition position) {
         CPPositionConstraint *constraint = [[CPPositionConstraint alloc] initWithPosition:position];
-        [_constraints addObject:constraint];
+        self.positionConstraint = constraint;
+        return constraint;
+    };
+}
+
+
+- (CPPositionConstraint * (^)(CPPosition position))toPosition
+{
+    return ^id(CPPosition position) {
+        CPPositionConstraint *constraint = [[CPPositionConstraint alloc] initWithPosition:position];
+        self.toPositionConstraint = constraint;
         return constraint;
     };
 }
@@ -50,7 +65,7 @@
 - (CPSizeConstraint *)size
 {
     CPSizeConstraint *constraint = [[CPSizeConstraint alloc] init];
-    [_constraints addObject:constraint];
+    self.sizeConstraint = constraint;
     return constraint;
 }
 
@@ -58,7 +73,7 @@
 - (CPWidthConstraint *)width
 {
     CPWidthConstraint *constraint = [[CPWidthConstraint alloc] init];
-    [_constraints addObject:constraint];
+    self.widthConstraint = constraint;
     return constraint;
 }
 
@@ -66,7 +81,7 @@
 - (CPHeightConstraint *)height
 {
     CPHeightConstraint *constraint = [[CPHeightConstraint alloc] init];
-    [_constraints addObject:constraint];
+    self.heightConstraint = constraint;
     return constraint;
 }
 
@@ -75,7 +90,7 @@
 {
     return ^id(UIEdgeInsets insets) {
         CPInsetsConstraint *constraint = [[CPInsetsConstraint alloc] initWithInsets:insets];
-        [_constraints addObject:constraint];
+        self.insetsConstraint = constraint;
         return constraint;
     };
 }
@@ -84,10 +99,7 @@
 - (void)build
 {
     [_view mas_makeConstraints:^(MASConstraintMaker *make) {
-        for (CPLayoutConstraint *constraint in _constraints) {
-            constraint.target = _view;
-            [constraint update:make];
-        }
+        [self updateConstraints:make];
     }];
 }
 
@@ -95,11 +107,25 @@
 - (void)update
 {
     [_view mas_updateConstraints:^(MASConstraintMaker *make) {
-        for (CPLayoutConstraint *constraint in _constraints) {
-            constraint.target = _view;
-            [constraint update:make];
-        }
+        [self updateConstraints:make];
     }];
+}
+
+
+- (void)updateConstraints:(MASConstraintMaker *)make {
+    NSMutableArray *constraints = [NSMutableArray array];
+
+    if (self.positionConstraint) [constraints addObject:self.positionConstraint];
+    if (self.toPositionConstraint) [constraints addObject:self.toPositionConstraint];
+    if (self.sizeConstraint) [constraints addObject:self.sizeConstraint];
+    if (self.widthConstraint) [constraints addObject:self.widthConstraint];
+    if (self.heightConstraint) [constraints addObject:self.heightConstraint];
+    if (self.insetsConstraint) [constraints addObject:self.insetsConstraint];
+
+    for (CPLayoutConstraint *constraint in constraints) {
+        constraint.target = _view;
+        [constraint update:make];
+    }
 }
 
 @end
