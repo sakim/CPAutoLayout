@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <Masonry/MASUtilities.h>
 #import "CPLayoutConstraint.h"
 
 @class CPSizeConstraint;
@@ -17,7 +18,7 @@
 
 @interface CPConstraintsBuilder : NSObject
 
-- (id)initWithView:(UIView *)view;
+- (id)initWithView:(MAS_VIEW *)view;
 
 - (CPPositionConstraint * (^)(CPPosition position))position;
 - (CPPositionConstraint * (^)(CPPosition position))toPosition; // represent implicit size

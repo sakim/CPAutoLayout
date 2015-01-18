@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <Masonry/MASUtilities.h>
 
 @class MASConstraintMaker;
 
@@ -26,7 +27,7 @@ typedef NS_OPTIONS(NSUInteger, CPPosition) {
 
 @interface CPLayoutConstraint : NSObject
 
-@property (nonatomic, weak) UIView *target;
+@property (nonatomic, weak) MAS_VIEW *target;
 
 - (void)update:(MASConstraintMaker *)make;
 

@@ -13,7 +13,7 @@
 
 - (CPWidthConstraint * (^)(CGFloat width))value;
 
-- (CPWidthConstraint * (^)(UIView *item))toItem;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))toItem;
 - (CPWidthConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPWidthConstraint * (^)(CGFloat multiplier))multipliedBy;
 - (CPWidthConstraint * (^)(CGFloat aspectRatio))aspectRatio;

@@ -17,7 +17,7 @@
 
 @interface CPConstraintsBuilder()
 
-@property (nonatomic, weak) UIView *view;
+@property (nonatomic, weak) MAS_VIEW *view;
 
 @property (nonatomic, strong) CPPositionConstraint *positionConstraint;
 @property (nonatomic, strong) CPPositionConstraint *toPositionConstraint;
@@ -31,7 +31,7 @@
 
 @implementation CPConstraintsBuilder
 
-- (instancetype)initWithView:(UIView *)view
+- (instancetype)initWithView:(MAS_VIEW *)view
 {
     self = [super init];
     if (self) {

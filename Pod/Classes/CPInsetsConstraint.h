@@ -12,6 +12,6 @@
 @interface CPInsetsConstraint : CPLayoutConstraint
 
 - (instancetype)initWithInsets:(UIEdgeInsets)insets;
-- (CPInsetsConstraint * (^)(UIView *item))toItem;
+- (CPInsetsConstraint * (^)(MAS_VIEW *item))toItem;
 
 @end

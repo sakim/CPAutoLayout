@@ -9,6 +9,7 @@
 #import "CPHeightConstraint.h"
 #import "Masonry.h"
 #import "MASConstraint+Private.h"
+#import "View+CPAutoLayout.h"
 
 
 @interface CPHeightConstraint ()
@@ -17,7 +18,7 @@
 @property (nonatomic, assign) NSLayoutRelation relation;
 
 // relative height
-@property (nonatomic, weak) UIView *item;
+@property (nonatomic, weak) MAS_VIEW *item;
 @property (nonatomic, assign) CGFloat offsetY;
 @property (nonatomic, assign) CGFloat multiplier;
 @property (nonatomic, assign) CGFloat aspect;
@@ -48,9 +49,9 @@
 }
 
 
-- (CPHeightConstraint *(^)(UIView *item))toItem
+- (CPHeightConstraint *(^)(MAS_VIEW *item))toItem
 {
-    return ^CPHeightConstraint *(UIView *toItem) {
+    return ^CPHeightConstraint *(MAS_VIEW *toItem) {
         self.item = toItem;
         return self;
     };

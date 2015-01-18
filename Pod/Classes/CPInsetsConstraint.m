@@ -12,7 +12,7 @@
 @interface CPInsetsConstraint ()
 
 @property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, weak) UIView *item;
+@property (nonatomic, weak) MAS_VIEW *item;
 
 @end
 
@@ -29,9 +29,9 @@
 }
 
 
-- (CPInsetsConstraint * (^)(UIView *item))toItem
+- (CPInsetsConstraint * (^)(MAS_VIEW *item))toItem
 {
-    return ^id(UIView *item) {
+    return ^id(MAS_VIEW *item) {
         self.item = item;
         return self;
     };
@@ -40,7 +40,7 @@
 
 - (void)update:(MASConstraintMaker *)make
 {
-    UIView *item = (_item != nil) ? _item : self.target.superview;
+    MAS_VIEW *item = (_item != nil) ? _item : self.target.superview;
 
     if (!isnan(_insets.top)) {
         make.top.equalTo(item.mas_top).with.offset(_insets.top);

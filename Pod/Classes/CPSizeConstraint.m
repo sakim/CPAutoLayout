@@ -9,6 +9,7 @@
 #import "CPSizeConstraint.h"
 #import "Masonry.h"
 #import "MASConstraint+Private.h"
+#import "View+CPAutoLayout.h"
 
 
 @interface CPSizeConstraint ()
@@ -17,7 +18,7 @@
 @property (nonatomic, assign) NSLayoutRelation relation;
 
 // relative size
-@property (nonatomic, weak) UIView *item;
+@property (nonatomic, weak) MAS_VIEW *item;
 @property (nonatomic, assign) CGSize offset;
 @property (nonatomic, assign) CGFloat multiplier;
 
@@ -48,9 +49,9 @@
 }
 
 
-- (CPSizeConstraint * (^)(UIView *item))toItem
+- (CPSizeConstraint * (^)(MAS_VIEW *item))toItem
 {
-    return ^CPSizeConstraint *(UIView *toItem) {
+    return ^CPSizeConstraint *(MAS_VIEW *toItem) {
         self.item = toItem;
         return self;
     };

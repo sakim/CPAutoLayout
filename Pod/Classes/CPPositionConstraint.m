@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) CPPosition position;
 @property (nonatomic, assign) CGSize offset;
-@property (nonatomic, weak) UIView *item;
+@property (nonatomic, weak) MAS_VIEW *item;
 
 @end
 
@@ -32,9 +32,9 @@
 }
 
 
-- (CPPositionConstraint * (^)(UIView *item))toItem
+- (CPPositionConstraint * (^)(MAS_VIEW *item))toItem
 {
-    return ^id(UIView *item) {
+    return ^id(MAS_VIEW *item) {
         self.item = item;
         return self;
     };
@@ -72,7 +72,7 @@
 
 - (void)update:(MASConstraintMaker *)make
 {
-    UIView *item = (self.item != nil) ? self.item : self.target.superview;
+    MAS_VIEW *item = (self.item != nil) ? self.item : self.target.superview;
     // default center
     make.centerX.equalTo(item.mas_centerX).with.offset(self.offset.width).priorityLow();
     make.centerY.equalTo(item.mas_centerY).with.offset(self.offset.height).priorityLow();
