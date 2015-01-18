@@ -17,4 +17,10 @@
 - (void)setConstraints:(void(^)(CPConstraintsBuilder *))block;
 - (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block;
 
+// https://gist.github.com/nfarina/3412730
+@property (nonatomic, assign) CGPoint $origin;
+@property (nonatomic, assign) CGSize $size;
+@property (nonatomic, assign) CGFloat $x, $y, $width, $height; // normal rect properties
+@property (nonatomic, assign) CGFloat $left, $top, $right, $bottom; // these will stretch the rect
+
 @end

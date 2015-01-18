@@ -114,13 +114,20 @@
 
 - (void)update:(MASConstraintMaker *)make
 {
+    CGFloat height;
     if (self.item) {
         make.height.equalToWithRelation(self.item.mas_height, self.relation).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(0, self.offsetY));
+        height = self.item.$height * self.multiplier + self.offsetY;
     } else if (self.aspect != 0) {
         make.height.equalToWithRelation(self.target.mas_width, self.relation).multipliedBy(self.aspect).sizeOffset(CGSizeMake(0, self.offsetY));
+        height = self.target.$width * self.aspect + self.offsetY;
     } else {
         make.height.equalToWithRelation(@(self.height), self.relation);
+        height = self.height;
     }
+
+    // set initial 'frame.size.height'
+    self.target.$height = height;
 }
 
 @end

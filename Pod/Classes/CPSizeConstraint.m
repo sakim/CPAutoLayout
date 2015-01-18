@@ -122,12 +122,18 @@
 
 - (void)update:(MASConstraintMaker *)make
 {
+    CGSize size;
     if (self.item) {
         make.size.equalToWithRelation(self.item, self.relation).multipliedBy(self.multiplier).sizeOffset(self.offset);
+        size = CGSizeMake(self.item.$width * self.multiplier + self.offset.width, self.item.$height * self.multiplier + self.offset.height);
     } else {
         make.width.equalToWithRelation(@(self.size.width), self.relation);
         make.height.equalToWithRelation(@(self.size.height), self.relation);
+        size = self.size;
     }
+
+    // set initial 'frame.size'
+    self.target.$size = size;
 }
 
 @end

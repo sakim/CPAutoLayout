@@ -98,7 +98,7 @@
 
 - (void)build
 {
-    [_view mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         [self updateConstraints:make];
     }];
 }
@@ -106,7 +106,7 @@
 
 - (void)update
 {
-    [_view mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
         [self updateConstraints:make];
     }];
 }
@@ -115,15 +115,19 @@
 - (void)updateConstraints:(MASConstraintMaker *)make {
     NSMutableArray *constraints = [NSMutableArray array];
 
+    // NOTE: must kept in order to calculate initial frame.
     if (self.positionConstraint) [constraints addObject:self.positionConstraint];
     if (self.toPositionConstraint) [constraints addObject:self.toPositionConstraint];
-    if (self.sizeConstraint) [constraints addObject:self.sizeConstraint];
-    if (self.widthConstraint) [constraints addObject:self.widthConstraint];
-    if (self.heightConstraint) [constraints addObject:self.heightConstraint];
     if (self.insetsConstraint) [constraints addObject:self.insetsConstraint];
 
+    if (self.sizeConstraint) [constraints addObject:self.sizeConstraint];
+    if (self.widthConstraint && self.widthConstraint.aspect == 0) [constraints addObject:self.widthConstraint];
+    if (self.heightConstraint) [constraints addObject:self.heightConstraint];
+    // update later to calculate width with aspect
+    if (self.widthConstraint && self.widthConstraint.aspect != 0) [constraints addObject:self.widthConstraint];
+
     for (CPLayoutConstraint *constraint in constraints) {
-        constraint.target = _view;
+        constraint.target = self.view;
         [constraint update:make];
     }
 }

@@ -23,4 +23,12 @@
 - (CPHeightConstraint * (^)())less;
 - (CPHeightConstraint * (^)())greater;
 
+// read-only
+@property (nonatomic, assign, readonly) CGFloat height;
+@property (nonatomic, assign, readonly) NSLayoutRelation relation;
+@property (nonatomic, weak, readonly) MAS_VIEW *item;
+@property (nonatomic, assign, readonly) CGFloat offsetY;
+@property (nonatomic, assign, readonly) CGFloat multiplier;
+@property (nonatomic, assign, readonly) CGFloat aspect;
+
 @end
