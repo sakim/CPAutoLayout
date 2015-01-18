@@ -152,7 +152,7 @@ CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the fo
 #### 0.3.3
 
 * Add support lessOrEqual and greaterOrEqual relation.
-* Add support 'frame.size' (experimental)
+* Add support initial 'frame.size'. (experimental)
 
 ## Author
 
