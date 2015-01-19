@@ -30,7 +30,7 @@
     [self.view addSubview:view1];
     [view1 setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter).withOffsetY(-80);
-        builder.size.value(CGSizeMake(80, 60));
+        builder.size.equalTo(CGSizeMake(80, 60));
     }];
 
     CPItemView *view2 = [[CPItemView alloc] initWithTitle:@"(v2): v1"];
@@ -38,7 +38,7 @@
     [self.view addSubview:view2];
     [view2 setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view1).withOffsetY(5);
-        builder.size.toItem(view1);
+        builder.size.equalToItem(view1);
     }];
 
     CPItemView *view3 = [[CPItemView alloc] initWithTitle:@"(v3): v1-(10x10)"];
@@ -46,7 +46,7 @@
     [self.view addSubview:view3];
     [view3 setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view2).withOffsetY(5);
-        builder.size.toItem(view1).withOffset(CGSizeMake(-10, -10));
+        builder.size.equalToItem(view1).withOffset(CGSizeMake(-10, -10));
     }];
 
     CPItemView *view4 = [[CPItemView alloc] initWithTitle:@"(v4): v1*0.5"];
@@ -54,7 +54,7 @@
     [self.view addSubview:view4];
     [view4 setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view3).withOffsetY(5);
-        builder.size.toItem(view1).multipliedBy(.5f);
+        builder.size.equalToItem(view1).multipliedBy(.5f);
     }];
 
     // description
@@ -63,8 +63,8 @@
     [self.view addSubview:description];
     [description setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
-        builder.width.toItem(self.view);
-        builder.height.value(20);
+        builder.width.equalToItem(self.view);
+        builder.height.equalTo(20);
     }];
 }
 

@@ -13,7 +13,7 @@
 @interface CPPositionConstraint ()
 
 @property (nonatomic, assign) CPPosition position;
-@property (nonatomic, assign) CGSize offset;
+@property (nonatomic, assign) CGPoint offset;
 @property (nonatomic, weak) MAS_VIEW *item;
 
 @end
@@ -26,7 +26,7 @@
     self = [super init];
     if (self) {
         _position = position;
-        _offset = CGSizeZero;
+        _offset = CGPointZero;
     }
     return self;
 }
@@ -41,9 +41,9 @@
 }
 
 
-- (CPPositionConstraint * (^)(CGSize offset))withOffset
+- (CPPositionConstraint * (^)(CGPoint offset))withOffset
 {
-    return ^id(CGSize offset) {
+    return ^id (CGPoint offset) {
         self.offset = offset;
         return self;
     };
@@ -52,9 +52,9 @@
 
 - (CPPositionConstraint *(^)(CGFloat offsetX))withOffsetX
 {
-    return ^CPPositionConstraint *(CGFloat offsetX) {
-        CGSize offset = self.offset;
-        self.offset = CGSizeMake(offsetX, offset.height);
+    return ^id (CGFloat offsetX) {
+        CGPoint offset = self.offset;
+        self.offset = CGPointMake(offsetX, offset.y);
         return self;
     };
 }
@@ -62,9 +62,9 @@
 
 - (CPPositionConstraint *(^)(CGFloat offsetY))withOffsetY
 {
-    return ^CPPositionConstraint *(CGFloat offsetY) {
-        CGSize offset = self.offset;
-        self.offset = CGSizeMake(offset.width, offsetY);
+    return ^id (CGFloat offsetY) {
+        CGPoint offset = self.offset;
+        self.offset = CGPointMake(offset.x, offsetY);
         return self;
     };
 }
@@ -74,40 +74,40 @@
 {
     MAS_VIEW *item = (self.item != nil) ? self.item : self.target.superview;
     // default center
-    make.centerX.equalTo(item.mas_centerX).with.offset(self.offset.width).priorityLow();
-    make.centerY.equalTo(item.mas_centerY).with.offset(self.offset.height).priorityLow();
+    make.centerX.equalTo(item.mas_centerX).with.offset(self.offset.x).priorityLow();
+    make.centerY.equalTo(item.mas_centerY).with.offset(self.offset.y).priorityLow();
 
     // position
     if (self.position & CPPositionTop) {
-        make.bottom.equalTo(item.mas_top).with.offset(-self.offset.height);
+        make.bottom.equalTo(item.mas_top).with.offset(-self.offset.y);
     }
 
     if (self.position & CPPositionRight) {
-        make.left.equalTo(item.mas_right).with.offset(self.offset.width);
+        make.left.equalTo(item.mas_right).with.offset(self.offset.x);
     }
 
     if (self.position & CPPositionBottom) {
-        make.top.equalTo(item.mas_bottom).with.offset(self.offset.height);
+        make.top.equalTo(item.mas_bottom).with.offset(self.offset.y);
     }
 
     if (self.position & CPPositionLeft) {
-        make.right.equalTo(item.mas_left).with.offset(-self.offset.width);
+        make.right.equalTo(item.mas_left).with.offset(-self.offset.x);
     }
 
     if (self.position & CPAlignmentLeft) {
-        make.left.equalTo(item.mas_left).with.offset(self.offset.width);
+        make.left.equalTo(item.mas_left).with.offset(self.offset.x);
     }
 
     if (self.position & CPAlignmentRight) {
-        make.right.equalTo(item.mas_right).with.offset(-self.offset.width);
+        make.right.equalTo(item.mas_right).with.offset(-self.offset.x);
     }
 
     if (self.position & CPAlignmentTop) {
-        make.top.equalTo(item.mas_top).with.offset(self.offset.height);
+        make.top.equalTo(item.mas_top).with.offset(self.offset.y);
     }
 
     if (self.position & CPAlignmentBottom) {
-        make.bottom.equalTo(item.mas_bottom).with.offset(-self.offset.height);
+        make.bottom.equalTo(item.mas_bottom).with.offset(-self.offset.y);
     }
 }
 

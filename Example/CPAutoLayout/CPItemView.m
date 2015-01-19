@@ -21,7 +21,7 @@
         [self addSubview:label];
         [label setConstraints:^(CPConstraintsBuilder *builder) {
             builder.position(CPPositionCenter);
-            builder.size.toItem(self);
+            builder.size.equalToItem(self);
         }];
         _titleLabel = label;
     }

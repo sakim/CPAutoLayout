@@ -25,7 +25,7 @@ With 'CPAutoLayout', you only need to consider position and alignment.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentRight)
-        builder.size.value(CGSizeMake(100, 100));
+        builder.size.equalTo(CGSizeMake(100, 100));
     }];
 ```
 
@@ -59,15 +59,15 @@ Position offset is a distance from its anchor point.
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.size.value(CGSizeMake(100, 100));
+        builder.size.equalTo(CGSizeMake(100, 100));
         builder.position(...);
     }];
 ```
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.width.value(100);
-        builder.height.value(100);
+        builder.width.equalTo(100);
+        builder.height.equalTo(100);
         builder.position(...);
     }];
 ```
@@ -77,7 +77,7 @@ Size equal to a item.
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.size.toItem(aView);
+        builder.size.equalToItem(aView);
         builder.position(...);
     }];
 ```
@@ -86,8 +86,8 @@ Width equal to a item's width, and has fixed height.
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.width.toItem(aView);
-        builder.height.value(50);
+        builder.width.equalToItem(aView);
+        builder.height.equalTo(50);
         builder.position(...);
     }];
 ```
@@ -96,7 +96,7 @@ View has always half size to a item.
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.size.toItem(aView).multipliedBy(.5f);
+        builder.size.equalToItem(aView).multipliedBy(.5f);
         builder.position(...);
     }];
 ```
@@ -105,7 +105,7 @@ Size offset is size difference to a item.
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.size.toItem(aView).withOffset(CGSiMake(10, 10));
+        builder.size.equalToItem(aView).withOffset(CGSizeMake(10, 10));
         builder.position(...);
     }];
 ```
@@ -116,7 +116,7 @@ Keep 2:1 aspect ratio.
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
         builder.width.aspectRatio(2);
-        builder.height.value(50);
+        builder.height.equalTo(50);
         builder.position(...);
     }];
 ```
@@ -125,7 +125,7 @@ Same as,
 
 ```obj-c
 [view setConstraints:^(CPConstraintsBuilder *builder) {
-        builder.width.value(100);
+        builder.width.equalTo(100);
         builder.height.aspectRatio(.5f);
         builder.position(...);
     }];
@@ -148,6 +148,15 @@ CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the fo
 >`pod 'CPAutoLayout'`
 
 ## Versions
+
+#### 0.4.0
+
+Significant API changes to clarity.
+
+* value() to equalTo(): builder.size.value(...) to builder.size.equalTo(...)
+* toItem() to equalToItem(): builder.size.toItem(...) to builder.size.equalToItem(...)
+* lessThanOrEqualTo(...), greaterThanOrEqualTo(...), lessThanOrEqualToItem(...), greaterThanOrEqualToItem(...)
+* CGSize to CGPoint in position offset.
 
 #### 0.3.3
 

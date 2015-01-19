@@ -11,18 +11,18 @@
 
 @interface CPSizeConstraint : CPLayoutConstraint
 
-- (CPSizeConstraint * (^)(CGSize size))value;
+- (CPSizeConstraint * (^)(CGSize size))equalTo;
+- (CPSizeConstraint * (^)(CGSize size))lessThanOrEqualTo;
+- (CPSizeConstraint * (^)(CGSize size))greaterThanOrEqualTo;
 
-- (CPSizeConstraint * (^)(MAS_VIEW *item))toItem;
+- (CPSizeConstraint * (^)(MAS_VIEW *item))equalToItem;
+- (CPSizeConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem;
+- (CPSizeConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem;
+
 - (CPSizeConstraint * (^)(CGSize offset))withOffset;
 - (CPSizeConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPSizeConstraint * (^)(CGFloat offsetY))withOffsetY;
 - (CPSizeConstraint * (^)(CGFloat multiplier))multipliedBy;
-
-// relations
-- (CPSizeConstraint * (^)())equal;
-- (CPSizeConstraint * (^)())less;
-- (CPSizeConstraint * (^)())greater;
 
 // read-only
 @property (nonatomic, assign, readonly) CGSize size;

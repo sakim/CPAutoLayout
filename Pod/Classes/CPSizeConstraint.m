@@ -33,26 +33,74 @@
     if (self) {
         _size = CGSizeZero;
         _multiplier = 1.f;
-        _relation = NSLayoutRelationEqual;
     }
-
     return self;
 }
 
 
-- (CPSizeConstraint *(^)(CGSize size))value
+- (CPSizeConstraint *(^)(CGSize size))equalTo
 {
-    return ^CPSizeConstraint *(CGSize size) {
+    return ^id (CGSize size) {
+        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize size))lessThanOrEqualTo
+{
+    return ^id (CGSize size) {
+        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize size))greaterThanOrEqualTo
+{
+    return ^id (CGSize size) {
+        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPSizeConstraint *(^)(CGSize size, NSLayoutRelation relation))equalToWithRelation
+{
+    return ^id (CGSize size, NSLayoutRelation relation) {
         self.size = size;
+        self.relation = relation;
         return self;
     };
 }
 
 
-- (CPSizeConstraint * (^)(MAS_VIEW *item))toItem
+- (CPSizeConstraint * (^)(MAS_VIEW *item))equalToItem
 {
-    return ^CPSizeConstraint *(MAS_VIEW *toItem) {
-        self.item = toItem;
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPSizeConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationGreaterThanOrEqual);
+    };
+}
+
+
+- (CPSizeConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationLessThanOrEqual);
+    };
+}
+
+
+- (CPSizeConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
+{
+    return ^id (MAS_VIEW *item, NSLayoutRelation relation) {
+        self.item = item;
+        self.relation = relation;
         return self;
     };
 }
@@ -88,33 +136,6 @@
 - (CPSizeConstraint *(^)(CGFloat multiplier))multipliedBy {
     return ^CPSizeConstraint *(CGFloat multiplier) {
         self.multiplier = multiplier;
-        return self;
-    };
-}
-
-
-- (CPSizeConstraint *(^)())equal
-{
-    return ^CPSizeConstraint *() {
-        self.relation = NSLayoutRelationEqual;
-        return self;
-    };
-}
-
-
-- (CPSizeConstraint *(^)())less
-{
-    return ^CPSizeConstraint *() {
-        self.relation = NSLayoutRelationLessThanOrEqual;
-        return self;
-    };
-}
-
-
-- (CPSizeConstraint *(^)())greater
-{
-    return ^CPSizeConstraint *() {
-        self.relation = NSLayoutRelationGreaterThanOrEqual;
         return self;
     };
 }

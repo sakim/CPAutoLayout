@@ -33,26 +33,74 @@
     self = [super init];
     if (self) {
         _multiplier = 1.f;
-        _relation = NSLayoutRelationEqual;
     }
-
     return self;
 }
 
 
-- (CPHeightConstraint *(^)(CGFloat height))value
+- (CPHeightConstraint *(^)(CGFloat height))equalTo
 {
-    return ^CPHeightConstraint *(CGFloat height) {
+    return ^id (CGFloat height) {
+        return self.equalToWithRelation(height, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPHeightConstraint *(^)(CGFloat height))lessThanOrEqualTo
+{
+    return ^id (CGFloat height) {
+        return self.equalToWithRelation(height, NSLayoutRelationLessThanOrEqual);
+    };
+}
+
+
+- (CPHeightConstraint *(^)(CGFloat height))greaterThanOrEqualTo
+{
+    return ^id (CGFloat height) {
+        return self.equalToWithRelation(height, NSLayoutRelationGreaterThanOrEqual);
+    };
+}
+
+
+- (CPHeightConstraint *(^)(CGFloat height, NSLayoutRelation relation))equalToWithRelation
+{
+    return ^id (CGFloat height, NSLayoutRelation relation) {
         self.height = height;
+        self.relation = relation;
         return self;
     };
 }
 
 
-- (CPHeightConstraint *(^)(MAS_VIEW *item))toItem
+- (CPHeightConstraint *(^)(MAS_VIEW *item))equalToItem
 {
-    return ^CPHeightConstraint *(MAS_VIEW *toItem) {
-        self.item = toItem;
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPHeightConstraint *(^)(MAS_VIEW *item))lessThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationLessThanOrEqual);
+    };
+}
+
+
+- (CPHeightConstraint *(^)(MAS_VIEW *item))greaterThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationGreaterThanOrEqual);
+    };
+}
+
+
+- (CPHeightConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
+{
+    return ^id (MAS_VIEW *item, NSLayoutRelation relation) {
+        self.item = item;
+        self.relation = relation;
         return self;
     };
 }
@@ -60,7 +108,7 @@
 
 - (CPHeightConstraint *(^)(CGFloat offsetY))withOffsetY
 {
-    return ^CPHeightConstraint *(CGFloat offsetY) {
+    return ^id (CGFloat offsetY) {
         self.offsetY = offsetY;
         return self;
     };
@@ -69,7 +117,7 @@
 
 - (CPHeightConstraint *(^)(CGFloat multiplier))multipliedBy
 {
-    return ^CPHeightConstraint *(CGFloat multiplier) {
+    return ^id (CGFloat multiplier) {
         self.multiplier = multiplier;
         return self;
     };
@@ -78,35 +126,8 @@
 
 - (CPHeightConstraint *(^)(CGFloat aspectRatio))aspectRatio
 {
-    return ^CPHeightConstraint *(CGFloat aspectRatio) {
+    return ^id (CGFloat aspectRatio) {
         self.aspect = aspectRatio;
-        return self;
-    };
-}
-
-
-- (CPHeightConstraint *(^)())equal
-{
-    return ^CPHeightConstraint *() {
-        self.relation = NSLayoutRelationEqual;
-        return self;
-    };
-}
-
-
-- (CPHeightConstraint *(^)())less
-{
-    return ^CPHeightConstraint *() {
-        self.relation = NSLayoutRelationLessThanOrEqual;
-        return self;
-    };
-}
-
-
-- (CPHeightConstraint *(^)())greater
-{
-    return ^CPHeightConstraint *() {
-        self.relation = NSLayoutRelationGreaterThanOrEqual;
         return self;
     };
 }

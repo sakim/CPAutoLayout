@@ -14,7 +14,7 @@
 - (instancetype)initWithPosition:(CPPosition)position;
 
 - (CPPositionConstraint * (^)(MAS_VIEW *item))toItem;
-- (CPPositionConstraint * (^)(CGSize offset))withOffset;
+- (CPPositionConstraint * (^)(CGPoint offset))withOffset;
 - (CPPositionConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPPositionConstraint * (^)(CGFloat offsetY))withOffsetY;
 

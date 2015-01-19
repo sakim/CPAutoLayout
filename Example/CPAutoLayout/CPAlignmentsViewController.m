@@ -37,7 +37,7 @@
     [self.view addSubview:center];
     [center setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionCenter);
-        builder.size.value(CGSizeMake(270, 270));
+        builder.size.equalTo(CGSizeMake(270, 270));
     }];
     self.center = center;
 
@@ -59,8 +59,8 @@
     [self.view addSubview:description];
     [description setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
-        builder.width.toItem(self.view);
-        builder.height.value(20);
+        builder.width.equalToItem(self.view);
+        builder.height.equalTo(20);
     }];
 }
 
@@ -73,7 +73,7 @@
     [self.view addSubview:item];
     [item setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(position).toItem(self.center);
-        builder.size.value(CGSizeMake(90, 90));
+        builder.size.equalTo(CGSizeMake(90, 90));
     }];
 }
 

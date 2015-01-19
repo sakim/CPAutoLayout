@@ -48,8 +48,8 @@
     [self.view addSubview:description];
     [description setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
-        builder.width.toItem(self.view);
-        builder.height.value(30);
+        builder.width.equalToItem(self.view);
+        builder.height.equalTo(30);
     }];
 }
 

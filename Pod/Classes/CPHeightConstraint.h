@@ -11,17 +11,13 @@
 
 @interface CPHeightConstraint : CPLayoutConstraint
 
-- (CPHeightConstraint * (^)(CGFloat height))value;
+- (CPHeightConstraint * (^)(CGFloat width))equalTo;
+- (CPHeightConstraint * (^)(CGFloat width))lessThanOrEqualTo;
+- (CPHeightConstraint * (^)(CGFloat width))greaterThanOrEqualTo;
 
-- (CPHeightConstraint * (^)(MAS_VIEW *item))toItem;
-- (CPHeightConstraint * (^)(CGFloat offsetY))withOffsetY;
-- (CPHeightConstraint * (^)(CGFloat multiplier))multipliedBy;
-- (CPHeightConstraint * (^)(CGFloat aspectRatio))aspectRatio;
-
-// relations
-- (CPHeightConstraint * (^)())equal;
-- (CPHeightConstraint * (^)())less;
-- (CPHeightConstraint * (^)())greater;
+- (CPHeightConstraint * (^)(MAS_VIEW *item))equalToItem;
+- (CPHeightConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem;
+- (CPHeightConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem;
 
 // read-only
 @property (nonatomic, assign, readonly) CGFloat height;

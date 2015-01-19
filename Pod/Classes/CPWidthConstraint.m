@@ -33,26 +33,74 @@
     self = [super init];
     if (self) {
         _multiplier = 1.f;
-        _relation = NSLayoutRelationEqual;
     }
-
     return self;
 }
 
 
-- (CPWidthConstraint *(^)(CGFloat width))value
+- (CPWidthConstraint *(^)(CGFloat width))equalTo
 {
-    return ^CPWidthConstraint *(CGFloat width) {
+    return ^id (CGFloat width) {
+        return self.equalToWithRelation(width, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPWidthConstraint *(^)(CGFloat width))lessThanOrEqualTo
+{
+    return ^id (CGFloat width) {
+        return self.equalToWithRelation(width, NSLayoutRelationLessThanOrEqual);
+    };
+}
+
+
+- (CPWidthConstraint *(^)(CGFloat width))greaterThanOrEqualTo
+{
+    return ^id (CGFloat width) {
+        return self.equalToWithRelation(width, NSLayoutRelationGreaterThanOrEqual);
+    };
+}
+
+
+- (CPWidthConstraint *(^)(CGFloat width, NSLayoutRelation relation))equalToWithRelation
+{
+    return ^id (CGFloat width, NSLayoutRelation relation) {
         self.width = width;
+        self.relation = relation;
         return self;
     };
 }
 
 
-- (CPWidthConstraint *(^)(MAS_VIEW *item))toItem
+- (CPWidthConstraint *(^)(MAS_VIEW *item))equalToItem
 {
-    return ^CPWidthConstraint *(MAS_VIEW *toItem) {
-        self.item = toItem;
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationEqual);
+    };
+}
+
+
+- (CPWidthConstraint *(^)(MAS_VIEW *item))lessThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationLessThanOrEqual);
+    };
+}
+
+
+- (CPWidthConstraint *(^)(MAS_VIEW *item))greaterThanOrEqualToItem
+{
+    return ^id (MAS_VIEW *item) {
+        return self.equalToItemWithRelation(item, NSLayoutRelationGreaterThanOrEqual);
+    };
+}
+
+
+- (CPWidthConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
+{
+    return ^id (MAS_VIEW *item, NSLayoutRelation relation) {
+        self.item = item;
+        self.relation = relation;
         return self;
     };
 }
@@ -60,7 +108,7 @@
 
 - (CPWidthConstraint *(^)(CGFloat offsetX))withOffsetX
 {
-    return ^CPWidthConstraint *(CGFloat offsetX) {
+    return ^id (CGFloat offsetX) {
         self.offsetX = offsetX;
         return self;
     };
@@ -69,7 +117,7 @@
 
 - (CPWidthConstraint *(^)(CGFloat multiplier))multipliedBy
 {
-    return ^CPWidthConstraint *(CGFloat multiplier) {
+    return ^id (CGFloat multiplier) {
         self.multiplier = multiplier;
         return self;
     };
@@ -78,35 +126,8 @@
 
 - (CPWidthConstraint *(^)(CGFloat aspectRatio))aspectRatio
 {
-    return ^CPWidthConstraint *(CGFloat aspectRatio) {
+    return ^id (CGFloat aspectRatio) {
         self.aspect = aspectRatio;
-        return self;
-    };
-}
-
-
-- (CPWidthConstraint *(^)())equal
-{
-    return ^CPWidthConstraint *() {
-        self.relation = NSLayoutRelationEqual;
-        return self;
-    };
-}
-
-
-- (CPWidthConstraint *(^)())less
-{
-    return ^CPWidthConstraint *() {
-        self.relation = NSLayoutRelationLessThanOrEqual;
-        return self;
-    };
-}
-
-
-- (CPWidthConstraint *(^)())greater
-{
-    return ^CPWidthConstraint *() {
-        self.relation = NSLayoutRelationGreaterThanOrEqual;
         return self;
     };
 }

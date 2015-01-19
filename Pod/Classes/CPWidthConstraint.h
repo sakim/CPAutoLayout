@@ -11,17 +11,17 @@
 
 @interface CPWidthConstraint : CPLayoutConstraint
 
-- (CPWidthConstraint * (^)(CGFloat width))value;
+- (CPWidthConstraint * (^)(CGFloat width))equalTo;
+- (CPWidthConstraint * (^)(CGFloat width))lessThanOrEqualTo;
+- (CPWidthConstraint * (^)(CGFloat width))greaterThanOrEqualTo;
 
-- (CPWidthConstraint * (^)(MAS_VIEW *item))toItem;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))equalToItem;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem;
+
 - (CPWidthConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPWidthConstraint * (^)(CGFloat multiplier))multipliedBy;
 - (CPWidthConstraint * (^)(CGFloat aspectRatio))aspectRatio;
-
-// relations
-- (CPWidthConstraint * (^)())equal;
-- (CPWidthConstraint * (^)())less;
-- (CPWidthConstraint * (^)())greater;
 
 // read-only
 @property (nonatomic, assign, readonly) CGFloat width;
