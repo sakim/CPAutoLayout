@@ -22,7 +22,6 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		6824506C51A4D780A49F0E3F /* CPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682459FD94CCD3AC3A0BB13A /* CPSizeViewController.m */; };
 		6824507C7207CD1334F60A67 /* CPAlignmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682456B7CDE73EC8FBC0F4DF /* CPAlignmentsViewController.m */; };
-		682453006FAE3BCAEA729D47 /* CPBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682457C0E605468F61FC055E /* CPBasicViewController.m */; };
 		682454A22D88850ECBAC52F0 /* CPInsetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682455D27AE72A76B3EB556F /* CPInsetsViewController.m */; };
 		682458D4E4F3E66DB5825B28 /* CPAlignments2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824547F42CCA5F08B147EA2 /* CPAlignments2ViewController.m */; };
 		68245CFE9FAC0C2CD0ED2732 /* CPItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682452AC42156B77252A18EF /* CPItemView.m */; };
@@ -69,10 +68,8 @@
 		682453669018FB10A3B37B97 /* CPPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPositionsViewController.h; sourceTree = "<group>"; };
 		6824547F42CCA5F08B147EA2 /* CPAlignments2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAlignments2ViewController.m; sourceTree = "<group>"; };
 		682454A93EC1D9363A6B1908 /* CPAlignmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAlignmentsViewController.h; sourceTree = "<group>"; };
-		682455316A80A0DFB1C55630 /* CPBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBasicViewController.h; sourceTree = "<group>"; };
 		682455D27AE72A76B3EB556F /* CPInsetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPInsetsViewController.m; sourceTree = "<group>"; };
 		682456B7CDE73EC8FBC0F4DF /* CPAlignmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAlignmentsViewController.m; sourceTree = "<group>"; };
-		682457C0E605468F61FC055E /* CPBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBasicViewController.m; sourceTree = "<group>"; };
 		682459FD94CCD3AC3A0BB13A /* CPSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSizeViewController.m; sourceTree = "<group>"; };
 		68245AA7DA6A52AD7E1494E4 /* CPInsetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPInsetsViewController.h; sourceTree = "<group>"; };
 		68245B999F4AF21A75F11066 /* CPAlignments2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAlignments2ViewController.h; sourceTree = "<group>"; };
@@ -158,8 +155,6 @@
 				FE193E031A18F0A300940CAD /* LaunchScreen.xib */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
-				682457C0E605468F61FC055E /* CPBasicViewController.m */,
-				682455316A80A0DFB1C55630 /* CPBasicViewController.h */,
 				68245E7FC2460B767AEDB9AD /* CPPositionsViewController.m */,
 				682453669018FB10A3B37B97 /* CPPositionsViewController.h */,
 				682452AC42156B77252A18EF /* CPItemView.m */,
@@ -395,7 +390,6 @@
 				6003F59E195388D20070C39A /* CPAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* CPViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				682453006FAE3BCAEA729D47 /* CPBasicViewController.m in Sources */,
 				68245F8E453A120EFC464803 /* CPPositionsViewController.m in Sources */,
 				68245CFE9FAC0C2CD0ED2732 /* CPItemView.m in Sources */,
 				6824507C7207CD1334F60A67 /* CPAlignmentsViewController.m in Sources */,

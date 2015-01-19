@@ -1,6 +1,6 @@
 # CPAutoLayout [![Build Status](https://travis-ci.org/sakim/CPAutoLayout.svg?branch=master)](https://travis-ci.org/sakim/CPAutoLayout.svg)
 
-CPAutoLayout is a position-based AutoLayout shorthand. It doesn't cover all of AutoLayout constraints. Instead, it only focus common use cases.
+CPAutoLayout is a position-based AutoLayout shorthand. It focuses common use cases of AutoLayout. Easily describe AutoLayout constraints with a position and related size.
 
 ## Usage
 
