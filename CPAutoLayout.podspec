@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "CPAutoLayout"
-  s.version          = "0.4.1"
+  s.version          = "0.4.2"
   s.summary          = "Position-based AutoLayout shorthand"
   s.description      = <<-DESC
                        CPAutoLayout is a position-based AutoLayout shorthand.
