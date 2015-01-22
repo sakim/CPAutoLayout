@@ -38,7 +38,7 @@
 }
 
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
     MAS_VIEW *item = (_item != nil) ? _item : self.target.superview;
 

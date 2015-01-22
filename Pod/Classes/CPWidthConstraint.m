@@ -133,7 +133,7 @@
 }
 
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
     CGFloat width;
     if (self.item) {
@@ -148,7 +148,9 @@
     }
 
     // set initial 'frame.size.width'
-    self.target.$width = width;
+    if (!update) {
+        self.target.$width = width;
+    }
 }
 
 @end

@@ -29,6 +29,6 @@ typedef NS_OPTIONS(NSUInteger, CPPosition) {
 
 @property (nonatomic, weak) MAS_VIEW *target;
 
-- (void)update:(MASConstraintMaker *)make;
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update;
 
 @end

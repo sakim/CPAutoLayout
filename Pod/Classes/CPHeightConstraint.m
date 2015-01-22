@@ -133,7 +133,7 @@
 }
 
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
     CGFloat height;
     if (self.item) {
@@ -148,7 +148,10 @@
     }
 
     // set initial 'frame.size.height'
-    self.target.$height = height;
+    if (!update) {
+        self.target.$height = height;
+    }
+
 }
 
 @end

@@ -99,7 +99,7 @@
 - (void)build
 {
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        [self updateConstraints:make];
+        [self buildConstraints:make update:NO];
     }];
 }
 
@@ -107,12 +107,12 @@
 - (void)update
 {
     [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
-        [self updateConstraints:make];
+        [self buildConstraints:make update:YES];
     }];
 }
 
 
-- (void)updateConstraints:(MASConstraintMaker *)make {
+- (void)buildConstraints:(MASConstraintMaker *)make update:(BOOL)update {
     NSMutableArray *constraints = [NSMutableArray array];
 
     // NOTE: must kept in order to calculate initial frame.
@@ -128,7 +128,7 @@
 
     for (CPLayoutConstraint *constraint in constraints) {
         constraint.target = self.view;
-        [constraint update:make];
+        [constraint build:make update:update];
     }
 }
 

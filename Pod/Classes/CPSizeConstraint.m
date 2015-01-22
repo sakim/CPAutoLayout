@@ -141,7 +141,7 @@
 }
 
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
     CGSize size;
     if (self.item) {
@@ -154,7 +154,9 @@
     }
 
     // set initial 'frame.size'
-    self.target.$size = size;
+    if (!update) {
+        self.target.$size = size;
+    }
 }
 
 @end

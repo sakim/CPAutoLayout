@@ -70,7 +70,7 @@
 }
 
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
     MAS_VIEW *item = (self.item != nil) ? self.item : self.target.superview;
     // default center

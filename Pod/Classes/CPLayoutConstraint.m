@@ -11,7 +11,7 @@
 
 @implementation CPLayoutConstraint
 
-- (void)update:(MASConstraintMaker *)make
+- (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
 }
 
