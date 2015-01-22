@@ -149,7 +149,7 @@ CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the fo
 
 ## Versions
 
-#### 0.4.1
+#### 0.4.2
 
 Fix animation error while updating constraints.
 
