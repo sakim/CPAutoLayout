@@ -46,7 +46,7 @@
     [self.view addSubview:view3];
     [view3 setConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view2).withOffsetY(5);
-        builder.size.equalToItem(view1).withOffset(CGSizeMake(-10, -10));
+        builder.size.equalToItem(view1).withSizeOffset(CGSizeMake(-10, -10));
     }];
 
     CPItemView *view4 = [[CPItemView alloc] initWithTitle:@"(v4): v1*0.5"];
