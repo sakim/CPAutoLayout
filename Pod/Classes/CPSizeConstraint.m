@@ -106,7 +106,7 @@
 }
 
 
-- (CPSizeConstraint *(^)(CGSize offset))withOffset
+- (CPSizeConstraint *(^)(CGSize offset))withSizeOffset
 {
     return ^CPSizeConstraint *(CGSize offset) {
         self.offset = offset;
@@ -115,7 +115,7 @@
 }
 
 
-- (CPSizeConstraint *(^)(CGFloat offsetX))withOffsetX
+- (CPSizeConstraint *(^)(CGFloat offsetX))withSizeOffsetX
 {
     return ^CPSizeConstraint *(CGFloat offsetX) {
         self.offset = CGSizeMake(offsetX, self.offset.height);
@@ -124,7 +124,7 @@
 }
 
 
-- (CPSizeConstraint *(^)(CGFloat offsetX))withOffsetY
+- (CPSizeConstraint *(^)(CGFloat offsetX))withSizeOffsetY
 {
     return ^CPSizeConstraint *(CGFloat offsetY) {
         self.offset = CGSizeMake(self.offset.width, offsetY);

@@ -21,7 +21,6 @@
 - (id)initWithView:(MAS_VIEW *)view;
 
 - (CPPositionConstraint * (^)(CPPosition position))position;
-- (CPPositionConstraint * (^)(CPPosition position))toPosition; // represent implicit size
 - (CPSizeConstraint *)size;
 - (CPWidthConstraint *)width;
 - (CPHeightConstraint *)height;

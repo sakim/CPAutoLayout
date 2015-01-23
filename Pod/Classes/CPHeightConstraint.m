@@ -23,6 +23,8 @@
 @property (nonatomic, assign) CGFloat multiplier;
 @property (nonatomic, assign) CGFloat aspect;
 
+@property (nonatomic, assign) CPPosition distancePosition;
+
 @end
 
 
@@ -33,6 +35,7 @@
     self = [super init];
     if (self) {
         _multiplier = 1.f;
+        _aspect = NAN;
     }
     return self;
 }
@@ -95,6 +98,25 @@
     };
 }
 
+- (CPHeightConstraint *(^)(MAS_VIEW *item))distanceToTopOf
+{
+    return ^id (MAS_VIEW *item) {
+        self.item = item;
+        self.distancePosition = CPPositionTop;
+        return self;
+    };
+}
+
+
+- (CPHeightConstraint *(^)(MAS_VIEW *item))distanceToBottomOf
+{
+    return ^id (MAS_VIEW *item) {
+        self.item = item;
+        self.distancePosition = CPPositionBottom;
+        return self;
+    };
+}
+
 
 - (CPHeightConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
 {
@@ -106,7 +128,7 @@
 }
 
 
-- (CPHeightConstraint *(^)(CGFloat offsetY))withOffsetY
+- (CPHeightConstraint *(^)(CGFloat offsetY))withSizeOffsetY
 {
     return ^id (CGFloat offsetY) {
         self.offsetY = offsetY;
@@ -133,13 +155,23 @@
 }
 
 
+- (BOOL)hasAspectRatio {
+    return !isnan(self.aspect);
+}
+
+
 - (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
-    CGFloat height;
-    if (self.item) {
+    CGFloat height = 0;
+
+    if (self.distancePosition == CPPositionTop) {
+        make.bottom.equalTo(self.item.mas_top).with.offset(self.offsetY);
+    } else if (self.distancePosition == CPPositionBottom) {
+        make.top.equalTo(self.item.mas_bottom).with.offset(-self.offsetY);
+    } else if (self.item) {
         make.height.equalToWithRelation(self.item.mas_height, self.relation).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(0, self.offsetY));
         height = self.item.$height * self.multiplier + self.offsetY;
-    } else if (self.aspect != 0) {
+    } else if (!isnan(self.aspect)) {
         make.height.equalToWithRelation(self.target.mas_width, self.relation).multipliedBy(self.aspect).sizeOffset(CGSizeMake(0, self.offsetY));
         height = self.target.$width * self.aspect + self.offsetY;
     } else {
@@ -151,7 +183,6 @@
     if (!update) {
         self.target.$height = height;
     }
-
 }
 
 @end

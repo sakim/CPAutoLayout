@@ -19,16 +19,13 @@
 - (CPWidthConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem;
 - (CPWidthConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem;
 
-- (CPWidthConstraint * (^)(CGFloat offsetX))withOffsetX;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))distanceToLeftOf;
+- (CPWidthConstraint * (^)(MAS_VIEW *item))distanceToRightOf;
+
+- (CPWidthConstraint * (^)(CGFloat offsetX))withSizeOffsetX;
 - (CPWidthConstraint * (^)(CGFloat multiplier))multipliedBy;
 - (CPWidthConstraint * (^)(CGFloat aspectRatio))aspectRatio;
 
-// read-only
-@property (nonatomic, assign, readonly) CGFloat width;
-@property (nonatomic, assign, readonly) NSLayoutRelation relation;
-@property (nonatomic, weak, readonly) MAS_VIEW *item;
-@property (nonatomic, assign, readonly) CGFloat offsetX;
-@property (nonatomic, assign, readonly) CGFloat multiplier;
-@property (nonatomic, assign, readonly) CGFloat aspect;
+- (BOOL)hasAspectRatio;
 
 @end

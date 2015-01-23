@@ -23,6 +23,8 @@
 @property (nonatomic, assign) CGFloat multiplier;
 @property (nonatomic, assign) CGFloat aspect;
 
+@property (nonatomic, assign) CPPosition distancePosition;
+
 @end
 
 
@@ -33,6 +35,7 @@
     self = [super init];
     if (self) {
         _multiplier = 1.f;
+        _aspect = NAN;
     }
     return self;
 }
@@ -96,6 +99,26 @@
 }
 
 
+- (CPWidthConstraint *(^)(MAS_VIEW *item))distanceToLeftOf
+{
+    return ^id (MAS_VIEW *item) {
+        self.item = item;
+        self.distancePosition = CPPositionLeft;
+        return self;
+    };
+}
+
+
+- (CPWidthConstraint *(^)(MAS_VIEW *item))distanceToRightOf
+{
+    return ^id (MAS_VIEW *item) {
+        self.item = item;
+        self.distancePosition = CPPositionRight;
+        return self;
+    };
+}
+
+
 - (CPWidthConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
 {
     return ^id (MAS_VIEW *item, NSLayoutRelation relation) {
@@ -106,7 +129,7 @@
 }
 
 
-- (CPWidthConstraint *(^)(CGFloat offsetX))withOffsetX
+- (CPWidthConstraint *(^)(CGFloat offsetX))withSizeOffsetX
 {
     return ^id (CGFloat offsetX) {
         self.offsetX = offsetX;
@@ -133,13 +156,23 @@
 }
 
 
+- (BOOL)hasAspectRatio {
+    return !isnan(self.aspect);
+}
+
+
 - (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
-    CGFloat width;
-    if (self.item) {
+    CGFloat width = 0;
+
+    if (self.distancePosition == CPPositionLeft) {
+        make.right.equalTo(self.item.mas_left).with.offset(self.offsetX);
+    } else if (self.distancePosition == CPPositionRight) {
+        make.left.equalTo(self.item.mas_right).with.offset(-self.offsetX);
+    } else if (self.item) {
         make.width.equalToWithRelation(self.item.mas_width, self.relation).multipliedBy(self.multiplier).sizeOffset(CGSizeMake(self.offsetX, 0));
         width = self.item.$width * self.multiplier + self.offsetX;
-    } else if (self.aspect != 0) {
+    } else if (!isnan(self.aspect)) {
         make.width.equalToWithRelation(self.target.mas_height, self.relation).multipliedBy(self.aspect).sizeOffset(CGSizeMake(self.offsetX, 0));
         width = self.target.$height * self.aspect + self.offsetX;
     } else {

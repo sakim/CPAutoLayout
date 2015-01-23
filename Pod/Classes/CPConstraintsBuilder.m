@@ -20,7 +20,6 @@
 @property (nonatomic, weak) MAS_VIEW *view;
 
 @property (nonatomic, strong) CPPositionConstraint *positionConstraint;
-@property (nonatomic, strong) CPPositionConstraint *toPositionConstraint;
 @property (nonatomic, strong) CPSizeConstraint *sizeConstraint;
 @property (nonatomic, strong) CPWidthConstraint *widthConstraint;
 @property (nonatomic, strong) CPHeightConstraint *heightConstraint;
@@ -47,16 +46,6 @@
     return ^id(CPPosition position) {
         CPPositionConstraint *constraint = [[CPPositionConstraint alloc] initWithPosition:position];
         self.positionConstraint = constraint;
-        return constraint;
-    };
-}
-
-
-- (CPPositionConstraint * (^)(CPPosition position))toPosition
-{
-    return ^id(CPPosition position) {
-        CPPositionConstraint *constraint = [[CPPositionConstraint alloc] initWithPosition:position];
-        self.toPositionConstraint = constraint;
         return constraint;
     };
 }
@@ -117,14 +106,13 @@
 
     // NOTE: must kept in order to calculate initial frame.
     if (self.positionConstraint) [constraints addObject:self.positionConstraint];
-    if (self.toPositionConstraint) [constraints addObject:self.toPositionConstraint];
     if (self.insetsConstraint) [constraints addObject:self.insetsConstraint];
 
     if (self.sizeConstraint) [constraints addObject:self.sizeConstraint];
-    if (self.widthConstraint && self.widthConstraint.aspect == 0) [constraints addObject:self.widthConstraint];
+    if (self.widthConstraint && ![self.widthConstraint hasAspectRatio]) [constraints addObject:self.widthConstraint];
     if (self.heightConstraint) [constraints addObject:self.heightConstraint];
     // update later to calculate width with aspect
-    if (self.widthConstraint && self.widthConstraint.aspect != 0) [constraints addObject:self.widthConstraint];
+    if (self.widthConstraint && [self.widthConstraint hasAspectRatio]) [constraints addObject:self.widthConstraint];
 
     for (CPLayoutConstraint *constraint in constraints) {
         constraint.target = self.view;
