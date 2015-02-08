@@ -11,7 +11,7 @@
 
 @interface CPInsetsConstraint ()
 
-@property (nonatomic, assign) UIEdgeInsets insets;
+@property (nonatomic, assign) MASEdgeInsets insets;
 @property (nonatomic, weak) MAS_VIEW *item;
 
 @end
@@ -19,7 +19,7 @@
 
 @implementation CPInsetsConstraint
 
-- (instancetype)initWithInsets:(UIEdgeInsets)insets
+- (instancetype)initWithInsets:(MASEdgeInsets)insets
 {
     self = [super init];
     if (self) {
@@ -40,22 +40,22 @@
 
 - (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
-    MAS_VIEW *item = (_item != nil) ? _item : self.target.superview;
+    MAS_VIEW *item = (self.item != nil) ? self.item : self.target.superview;
 
-    if (!isnan(_insets.top)) {
-        make.top.equalTo(item.mas_top).with.offset(_insets.top);
+    if (!isnan(self.insets.top)) {
+        make.top.equalTo(item.mas_top).with.offset(self.insets.top);
     }
 
-    if (!isnan(_insets.right)) {
-        make.right.equalTo(item.mas_right).with.offset(-_insets.right);
+    if (!isnan(self.insets.right)) {
+        make.right.equalTo(item.mas_right).with.offset(-self.insets.right);
     }
 
-    if (!isnan(_insets.bottom)) {
-        make.bottom.equalTo(item.mas_bottom).with.offset(-_insets.bottom);
+    if (!isnan(self.insets.bottom)) {
+        make.bottom.equalTo(item.mas_bottom).with.offset(-self.insets.bottom);
     }
 
-    if (!isnan(_insets.left)) {
-        make.left.equalTo(item.mas_left).with.offset(_insets.left);
+    if (!isnan(self.insets.left)) {
+        make.left.equalTo(item.mas_left).with.offset(self.insets.left);
     }
 }
 

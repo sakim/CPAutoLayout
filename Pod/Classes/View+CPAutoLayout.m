@@ -11,11 +11,19 @@
 @implementation MAS_VIEW (CPAutoLayout)
 
 
-- (void)setConstraints:(void(^)(CPConstraintsBuilder *))block
+- (void)setConstraints:(void (^)(CPConstraintsBuilder *))block
 {
     CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
     block(builder);
-    [builder build];
+    [builder make];
+}
+
+
+- (void)makeConstraints:(void(^)(CPConstraintsBuilder *))block
+{
+    CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
+    block(builder);
+    [builder make];
 }
 
 

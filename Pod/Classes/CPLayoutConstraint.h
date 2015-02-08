@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Masonry/MASUtilities.h>
 
 @class MASConstraintMaker;

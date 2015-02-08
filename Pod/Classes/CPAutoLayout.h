@@ -9,6 +9,8 @@
 #import "View+CPAutoLayout.h"
 #import "CPConstraintsBuilder.h"
 #import "CPPositionConstraint.h"
+#import "CPHorizontalConstraint.h"
+#import "CPVerticalConstraint.h"
 #import "CPSizeConstraint.h"
 #import "CPWidthConstraint.h"
 #import "CPHeightConstraint.h"

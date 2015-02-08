@@ -28,15 +28,16 @@
     CPItemView *view1 = [[CPItemView alloc] initWithTitle:@"(v1): 80x60"];
     view1.backgroundColor = [UIColor colorWithRed:0.6 green:0.82 blue:0.72 alpha:1];
     [self.view addSubview:view1];
-    [view1 setConstraints:^(CPConstraintsBuilder *builder) {
+    [view1 makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter).withOffsetY(-80);
-        builder.size.equalTo(CGSizeMake(80, 60));
+        [NSValue valueWithCGSize:CGSizeMake(100, 100)];
+//        builder.size.equalToItem();
     }];
 
     CPItemView *view2 = [[CPItemView alloc] initWithTitle:@"(v2): v1"];
     view2.backgroundColor = [UIColor colorWithRed:0.6 green:0.82 blue:0.72 alpha:1];
     [self.view addSubview:view2];
-    [view2 setConstraints:^(CPConstraintsBuilder *builder) {
+    [view2 makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view1).withOffsetY(5);
         builder.size.equalToItem(view1);
     }];
@@ -44,7 +45,7 @@
     CPItemView *view3 = [[CPItemView alloc] initWithTitle:@"(v3): v1-(10x10)"];
     view3.backgroundColor = [UIColor colorWithRed:0.6 green:0.82 blue:0.72 alpha:1];
     [self.view addSubview:view3];
-    [view3 setConstraints:^(CPConstraintsBuilder *builder) {
+    [view3 makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view2).withOffsetY(5);
         builder.size.equalToItem(view1).withSizeOffset(CGSizeMake(-10, -10));
     }];
@@ -52,7 +53,7 @@
     CPItemView *view4 = [[CPItemView alloc] initWithTitle:@"(v4): v1*0.5"];
     view4.backgroundColor = [UIColor colorWithRed:0.6 green:0.82 blue:0.72 alpha:1];
     [self.view addSubview:view4];
-    [view4 setConstraints:^(CPConstraintsBuilder *builder) {
+    [view4 makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionBottom).toItem(view3).withOffsetY(5);
         builder.size.equalToItem(view1).multipliedBy(.5f);
     }];
@@ -61,7 +62,7 @@
     CPItemView *description = [[CPItemView alloc] initWithTitle:@"Shows fixed or relative size views."];
     description.titleLabel.font = [UIFont fontWithName:@"GillSans" size:13.f];
     [self.view addSubview:description];
-    [description setConstraints:^(CPConstraintsBuilder *builder) {
+    [description makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
         builder.width.equalToItem(self.view);
         builder.height.equalTo(20);

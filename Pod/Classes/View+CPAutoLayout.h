@@ -14,8 +14,10 @@
 
 @interface MAS_VIEW (CPAutoLayout)
 
-- (void)setConstraints:(void(^)(CPConstraintsBuilder *))block;
+- (void)setConstraints:(void(^)(CPConstraintsBuilder *))block __attribute__((deprecated));
+- (void)makeConstraints:(void(^)(CPConstraintsBuilder *))block;
 - (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block;
+
 
 // https://gist.github.com/nfarina/3412730
 @property (nonatomic, assign) CGPoint $origin;

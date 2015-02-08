@@ -19,7 +19,7 @@
         label.numberOfLines = 2;
         label.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:label];
-        [label setConstraints:^(CPConstraintsBuilder *builder) {
+        [label makeConstraints:^(CPConstraintsBuilder *builder) {
             builder.position(CPPositionCenter);
             builder.size.equalToItem(self);
         }];

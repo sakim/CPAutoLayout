@@ -23,7 +23,7 @@ Even with [Masonry](https://github.com/Masonry/Masonry), all the hard edge compa
 With 'CPAutoLayout', you only need to consider position and alignment.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentRight)
         builder.size.equalTo(CGSizeMake(100, 100));
     }];
@@ -38,7 +38,7 @@ A lot of examples are ready. To run the example project, clone the repo, and run
 Represent position with CPPosition options.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionRight | CPAlignmentTop);
         ....
     }];
@@ -47,7 +47,7 @@ Represent position with CPPosition options.
 Position offset is a distance from its anchor point.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionRight | CPAlignmentTop).withOffsetX(10);
         ....
     }];
@@ -58,14 +58,14 @@ Position offset is a distance from its anchor point.
 #### Fixed Size
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.size.equalTo(CGSizeMake(100, 100));
     }];
 ```
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.width.equalTo(100);
         builder.height.equalTo(100);
@@ -76,7 +76,7 @@ Position offset is a distance from its anchor point.
 Size equal to a item.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.size.equalToItem(aView);
     }];
@@ -85,7 +85,7 @@ Size equal to a item.
 Width equal to a item's width, and has fixed height.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.width.equalToItem(aView);
         builder.height.equalTo(50);
@@ -95,7 +95,7 @@ Width equal to a item's width, and has fixed height.
 View has always half size to a item.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.size.equalToItem(aView).multipliedBy(.5f);
     }];
@@ -104,7 +104,7 @@ View has always half size to a item.
 Size offset is size difference to a item.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.size.equalToItem(aView).withSizeOffset(CGSizeMake(10, 10));
     }];
@@ -114,7 +114,7 @@ Size offset is size difference to a item.
 Keep 2:1 aspect ratio.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.width.aspectRatio(2);
         builder.height.equalTo(50);
@@ -124,7 +124,7 @@ Keep 2:1 aspect ratio.
 Same as,
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentCenter);
         builder.width.equalTo(100);
         builder.height.aspectRatio(.5f);
@@ -135,7 +135,7 @@ Same as,
 Usually used to represent background view.
 
 ```obj-c
-[view setConstraints:^(CPConstraintsBuilder *builder) {
+[view makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.insets(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
 ```
@@ -148,6 +148,17 @@ CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the fo
 >`pod 'CPAutoLayout'`
 
 ## Versions
+
+#### 0.6.0
+
+Support a horizontal and a vertical position.
+
+* builder.horizontal(CPAlignmentRight).toItem(item);
+* builder.vertical(CPAlignmentBottom).toItem(item);
+
+Rename 'setConstraints:' to 'makeConstraints:'. 'setConstraints:' is remained for backward compatibility.
+
+Add some exceptions to give more reasonable error messages.
 
 #### 0.5.0
 

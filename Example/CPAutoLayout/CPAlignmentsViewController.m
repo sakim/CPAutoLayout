@@ -35,7 +35,7 @@
     center.backgroundColor = [UIColor colorWithRed:0.6 green:0.82 blue:0.72 alpha:1];
     center.titleLabel.font = [UIFont fontWithName:@"GillSans" size:15];
     [self.view addSubview:center];
-    [center setConstraints:^(CPConstraintsBuilder *builder) {
+    [center makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPPositionCenter);
         builder.size.equalTo(CGSizeMake(270, 270));
     }];
@@ -57,7 +57,7 @@
     CPItemView *description = [[CPItemView alloc] initWithTitle:@"Shows views aligned inside center view."];
     description.titleLabel.font = [UIFont fontWithName:@"GillSans" size:13.f];
     [self.view addSubview:description];
-    [description setConstraints:^(CPConstraintsBuilder *builder) {
+    [description makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
         builder.width.equalToItem(self.view);
         builder.height.equalTo(20);
@@ -71,7 +71,7 @@
     item.layer.borderWidth = 0.5f;
     item.layer.borderColor = [UIColor blackColor].CGColor;
     [self.view addSubview:item];
-    [item setConstraints:^(CPConstraintsBuilder *builder) {
+    [item makeConstraints:^(CPConstraintsBuilder *builder) {
         builder.position(position).toItem(self.center);
         builder.size.equalTo(CGSizeMake(90, 90));
     }];
