@@ -31,6 +31,7 @@
 - (CPInsetsConstraint * (^)(UIEdgeInsets insets))insets;
 
 - (void)make;
+- (void)remake;
 - (void)update;
 
 @end

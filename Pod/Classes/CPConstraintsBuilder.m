@@ -145,6 +145,13 @@
 }
 
 
+- (void)remake {
+    [self.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self buildConstraints:make update:NO];
+    }];
+}
+
+
 - (void)update
 {
     [self.view mas_updateConstraints:^(MASConstraintMaker *make) {

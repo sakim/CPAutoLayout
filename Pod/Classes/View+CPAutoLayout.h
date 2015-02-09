@@ -16,6 +16,7 @@
 
 - (void)setConstraints:(void(^)(CPConstraintsBuilder *))block __attribute__((deprecated));
 - (void)makeConstraints:(void(^)(CPConstraintsBuilder *))block;
+- (void)remakeConstraints:(void(^)(CPConstraintsBuilder *))block;
 - (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block;
 
 

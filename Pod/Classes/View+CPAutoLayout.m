@@ -26,6 +26,13 @@
     [builder make];
 }
 
+- (void)remakeConstraints:(void (^)(CPConstraintsBuilder *))block
+{
+    CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
+    block(builder);
+    [builder remake];
+}
+
 
 - (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block
 {
