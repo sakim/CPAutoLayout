@@ -49,7 +49,7 @@
 - (CPSizeConstraint *(^)(CGSize size))lessThanOrEqualTo
 {
     return ^id (CGSize size) {
-        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+        return self.equalToWithRelation(size, NSLayoutRelationLessThanOrEqual);
     };
 }
 
@@ -57,7 +57,7 @@
 - (CPSizeConstraint *(^)(CGSize size))greaterThanOrEqualTo
 {
     return ^id (CGSize size) {
-        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+        return self.equalToWithRelation(size, NSLayoutRelationGreaterThanOrEqual);
     };
 }
 
