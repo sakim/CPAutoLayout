@@ -6,6 +6,7 @@
 #import "CPAlignmentsViewController.h"
 #import "CPAutoLayout.h"
 #import "CPItemView.h"
+#import "CPLayoutConstraint.h"
 
 @interface CPAlignmentsViewController ()
 
@@ -58,21 +59,21 @@
     description.titleLabel.font = [UIFont fontWithName:@"GillSans" size:13.f];
     [self.view addSubview:description];
     [description makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop|CPAlignmentLeft).withOffsetY(5);
+        builder.position(CPPositionCenter).aligned(CPAlignmentTop|CPAlignmentLeft).toItem(self.view).withOffsetY(5);
         builder.width.equalToItem(self.view);
         builder.height.equalTo(20);
     }];
 }
 
 
-- (void)createItemTo:(CPPosition)position title:(NSString *)title
+- (void)createItemTo:(CPAlignment)alignment title:(NSString *)title
 {
     CPItemView *item = [[CPItemView alloc] initWithTitle:title];
     item.layer.borderWidth = 0.5f;
     item.layer.borderColor = [UIColor blackColor].CGColor;
     [self.view addSubview:item];
     [item makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(position).toItem(self.center);
+        builder.position(CPPositionCenter).aligned(alignment).toItem(self.center);
         builder.size.equalTo(CGSizeMake(90, 90));
     }];
 }
