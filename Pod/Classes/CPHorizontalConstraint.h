@@ -9,6 +9,7 @@
 
 - (instancetype)initWithPosition:(CPPosition)position;
 
+- (CPHorizontalConstraint * (^)(CPAlignment alignment))aligned;
 - (CPHorizontalConstraint * (^)(MAS_VIEW *item))toItem;
 - (CPHorizontalConstraint * (^)(CGFloat offsetX))withOffsetX;
 

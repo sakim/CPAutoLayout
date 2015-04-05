@@ -17,8 +17,11 @@ typedef NS_OPTIONS(NSUInteger, CPPosition) {
     CPPositionRight     = 1 << 1,
     CPPositionBottom    = 1 << 2,
     CPPositionLeft      = 1 << 3,
+};
 
-    CPAlignmentCenter   = 1 << 4,
+
+typedef NS_OPTIONS(NSUInteger, CPAlignment) {
+    CPAlignmentCenter   = 1 << 4, // backward compatibility
     CPAlignmentTop      = 1 << 5,
     CPAlignmentRight    = 1 << 6,
     CPAlignmentBottom   = 1 << 7,

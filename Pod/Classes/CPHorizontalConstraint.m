@@ -9,6 +9,7 @@
 @interface CPHorizontalConstraint ()
 
 @property (nonatomic, assign) CPPosition position;
+@property (nonatomic, assign) CPAlignment alignment;
 @property (nonatomic, assign) CGFloat offsetX;
 @property (nonatomic, weak) MAS_VIEW *item;
 
@@ -26,6 +27,14 @@
 }
 
 
+- (CPHorizontalConstraint * (^)(CPAlignment alignment))aligned {
+    return ^id(CPAlignment alignment) {
+        self.alignment = alignment;
+        return self;
+    };
+}
+
+
 - (CPHorizontalConstraint * (^)(MAS_VIEW *item))toItem
 {
     return ^id(MAS_VIEW *item) {
@@ -35,7 +44,7 @@
 }
 
 
-- (CPHorizontalConstraint *(^)(CGFloat offsetX))withOffsetX
+- (CPHorizontalConstraint * (^)(CGFloat offsetX))withOffsetX
 {
     return ^id (CGFloat offsetX) {
         self.offsetX = offsetX;
@@ -53,17 +62,21 @@
     // position
     if (self.position & CPPositionRight) {
         make.left.equalTo(item.mas_right).with.offset(self.offsetX);
-    }
-
-    if (self.position & CPPositionLeft) {
+    } else if (self.position & CPPositionLeft) {
         make.right.equalTo(item.mas_left).with.offset(-self.offsetX);
     }
 
-    if (self.position & CPAlignmentLeft) {
+    // alignment
+    if (self.alignment & CPAlignmentLeft) {
         make.left.equalTo(item.mas_left).with.offset(self.offsetX);
+    } else if (self.alignment & CPAlignmentRight) {
+        make.right.equalTo(item.mas_right).with.offset(-self.offsetX);
     }
 
-    if (self.position & CPAlignmentRight) {
+    // backward compatibility
+    if (self.position & CPAlignmentLeft) {
+        make.left.equalTo(item.mas_left).with.offset(self.offsetX);
+    } else if (self.position & CPAlignmentRight) {
         make.right.equalTo(item.mas_right).with.offset(-self.offsetX);
     }
 }

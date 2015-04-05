@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <CPAutoLayout/CPLayoutConstraint.h>
+#import <CPAutoLayout/CPPositionConstraint.h>
 #import "CPPositionConstraint.h"
 #import "Masonry.h"
 
@@ -13,6 +15,7 @@
 @interface CPPositionConstraint ()
 
 @property (nonatomic, assign) CPPosition position;
+@property (nonatomic, assign) CPAlignment alignment;
 @property (nonatomic, assign) CGPoint offset;
 @property (nonatomic, weak) MAS_VIEW *item;
 
@@ -29,6 +32,14 @@
         _offset = CGPointZero;
     }
     return self;
+}
+
+
+- (CPPositionConstraint * (^)(CPAlignment alignment))aligned {
+    return ^id(CPAlignment alignment) {
+        self.alignment = alignment;
+        return self;
+    };
 }
 
 
@@ -80,33 +91,37 @@
     // position
     if (self.position & CPPositionTop) {
         make.bottom.equalTo(item.mas_top).with.offset(-self.offset.y);
-    }
-
-    if (self.position & CPPositionRight) {
+    } else if (self.position & CPPositionRight) {
         make.left.equalTo(item.mas_right).with.offset(self.offset.x);
-    }
-
-    if (self.position & CPPositionBottom) {
+    } else if (self.position & CPPositionBottom) {
         make.top.equalTo(item.mas_bottom).with.offset(self.offset.y);
-    }
-
-    if (self.position & CPPositionLeft) {
+    } else if (self.position & CPPositionLeft) {
         make.right.equalTo(item.mas_left).with.offset(-self.offset.x);
     }
 
-    if (self.position & CPAlignmentLeft) {
+    // alignment
+    if (self.alignment & CPAlignmentLeft) {
         make.left.equalTo(item.mas_left).with.offset(self.offset.x);
+    } else if (self.alignment & CPAlignmentRight) {
+        make.right.equalTo(item.mas_right).with.offset(-self.offset.x);
     }
 
-    if (self.position & CPAlignmentRight) {
+    if (self.alignment & CPAlignmentTop) {
+        make.top.equalTo(item.mas_top).with.offset(self.offset.y);
+    } else if (self.alignment & CPAlignmentBottom) {
+        make.bottom.equalTo(item.mas_bottom).with.offset(-self.offset.y);
+    }
+
+    // backward compatibility
+    if (self.position & CPAlignmentLeft) {
+        make.left.equalTo(item.mas_left).with.offset(self.offset.x);
+    } else if (self.position & CPAlignmentRight) {
         make.right.equalTo(item.mas_right).with.offset(-self.offset.x);
     }
 
     if (self.position & CPAlignmentTop) {
         make.top.equalTo(item.mas_top).with.offset(self.offset.y);
-    }
-
-    if (self.position & CPAlignmentBottom) {
+    } else if (self.position & CPAlignmentBottom) {
         make.bottom.equalTo(item.mas_bottom).with.offset(-self.offset.y);
     }
 }

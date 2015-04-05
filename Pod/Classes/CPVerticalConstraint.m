@@ -8,6 +8,7 @@
 @interface CPVerticalConstraint ()
 
 @property (nonatomic, assign) CPPosition position;
+@property (nonatomic, assign) CPAlignment alignment;
 @property (nonatomic, assign) CGFloat offsetY;
 @property (nonatomic, weak) MAS_VIEW *item;
 
@@ -22,6 +23,14 @@
         _position = position;
     }
     return self;
+}
+
+
+- (CPVerticalConstraint * (^)(CPAlignment alignment))aligned {
+    return ^id(CPAlignment alignment) {
+        self.alignment = alignment;
+        return self;
+    };
 }
 
 
@@ -52,17 +61,21 @@
     // position
     if (self.position & CPPositionTop) {
         make.bottom.equalTo(item.mas_top).with.offset(-self.offsetY);
-    }
-
-    if (self.position & CPPositionBottom) {
+    } else if (self.position & CPPositionBottom) {
         make.top.equalTo(item.mas_bottom).with.offset(self.offsetY);
     }
 
-    if (self.position & CPAlignmentTop) {
+    // alignment
+    if (self.alignment & CPAlignmentTop) {
         make.top.equalTo(item.mas_top).with.offset(self.offsetY);
+    } else if (self.alignment & CPAlignmentBottom) {
+        make.bottom.equalTo(item.mas_bottom).with.offset(-self.offsetY);
     }
 
-    if (self.position & CPAlignmentBottom) {
+    // backward compatibility
+    if (self.position & CPAlignmentTop) {
+        make.top.equalTo(item.mas_top).with.offset(self.offsetY);
+    } else if (self.position & CPAlignmentBottom) {
         make.bottom.equalTo(item.mas_bottom).with.offset(-self.offsetY);
     }
 }
