@@ -27,7 +27,8 @@
 @property (nonatomic, strong) CPSizeConstraint *sizeConstraint;
 @property (nonatomic, strong) CPWidthConstraint *widthConstraint;
 @property (nonatomic, strong) CPHeightConstraint *heightConstraint;
-@property (nonatomic, strong) CPInsetsConstraint *insetsConstraint;
+
+@property (nonatomic, strong) CPInsetsConstraint *insetsConstraint __attribute__((deprecated));
 
 @end
 
@@ -116,7 +117,7 @@
 }
 
 
-- (CPInsetsConstraint *(^)(UIEdgeInsets insets))insets
+- (CPInsetsConstraint *(^)(UIEdgeInsets insets))insets __attribute__((deprecated))
 {
     return ^id(UIEdgeInsets insets) {
         if (self.insetsConstraint != nil) {
@@ -152,11 +153,73 @@
 }
 
 
-- (void)update
+- (void)update:(CPConstraintsBuilder *)builder
 {
-    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self updateConstraints:builder];
+    [self.view mas_remakeConstraints:^(MASConstraintMaker *make) {
         [self buildConstraints:make update:YES];
     }];
+}
+
+
+- (void)updateConstraints:(CPConstraintsBuilder *)builder {
+    // position-related update
+    if (builder.positionConstraint != nil) {
+        self.positionConstraint = builder.positionConstraint;
+        self.horizontalConstraint = nil;
+        self.verticalConstraint = nil;
+    }
+
+    if (builder.horizontalConstraint != nil) {
+        self.horizontalConstraint = builder.horizontalConstraint;
+        if (builder.verticalConstraint == nil && self.positionConstraint != nil) {
+            self.verticalConstraint = self.positionConstraint.verticalConstraint;
+        }
+
+        if (builder.positionConstraint == nil) {
+            self.positionConstraint = nil;
+        }
+    }
+
+    if (builder.verticalConstraint != nil) {
+        self.verticalConstraint = builder.verticalConstraint;
+        if (builder.horizontalConstraint == nil && self.horizontalConstraint != nil) {
+            self.horizontalConstraint = self.positionConstraint.horizontalConstraint;
+        }
+
+        if (builder.positionConstraint == nil) {
+            self.positionConstraint = nil;
+        }
+    }
+
+    // size-related update
+    if (builder.sizeConstraint != nil) {
+        self.sizeConstraint = builder.sizeConstraint;
+        self.widthConstraint = nil;
+        self.heightConstraint = nil;
+    }
+
+    if (builder.widthConstraint != nil) {
+        self.widthConstraint = builder.widthConstraint;
+        if (self.heightConstraint == nil && self.sizeConstraint != nil) {
+            self.heightConstraint = self.sizeConstraint.heightConstraint;
+        }
+
+        if (builder.sizeConstraint == nil) {
+            self.sizeConstraint = nil;
+        }
+    }
+
+    if (builder.heightConstraint != nil) {
+        self.heightConstraint = builder.heightConstraint;
+        if (self.widthConstraint == nil && self.sizeConstraint != nil) {
+            self.widthConstraint = self.sizeConstraint.widthConstraint;
+        }
+
+        if (builder.sizeConstraint == nil) {
+            self.sizeConstraint = nil;
+        }
+    }
 }
 
 

@@ -8,6 +8,9 @@
 
 #import "CPLayoutConstraint.h"
 
+@class CPHorizontalConstraint;
+@class CPVerticalConstraint;
+
 
 @interface CPPositionConstraint : CPLayoutConstraint
 
@@ -18,5 +21,9 @@
 - (CPPositionConstraint * (^)(CGPoint offset))withOffset;
 - (CPPositionConstraint * (^)(CGFloat offsetX))withOffsetX;
 - (CPPositionConstraint * (^)(CGFloat offsetY))withOffsetY;
+
+// internal use
+@property (nonatomic, strong) CPHorizontalConstraint *horizontalConstraint;
+@property (nonatomic, strong) CPVerticalConstraint *verticalConstraint;
 
 @end

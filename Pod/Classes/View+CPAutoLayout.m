@@ -6,12 +6,22 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "View+CPAutoLayout.h"
 
 @implementation MAS_VIEW (CPAutoLayout)
 
+static char kAssociatedObjectKey;
 
-- (void)setConstraints:(void (^)(CPConstraintsBuilder *))block
+- (void)setAssociatedObject:(id)object {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey, object, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (id)associatedObject {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey);
+}
+
+- (void)setConstraints:(void (^)(CPConstraintsBuilder *builder))block
 {
     CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
     block(builder);
@@ -19,26 +29,30 @@
 }
 
 
-- (void)makeConstraints:(void(^)(CPConstraintsBuilder *))block
+- (void)makeConstraints:(void (^)(CPConstraintsBuilder *builder))block
 {
     CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
     block(builder);
     [builder make];
+    [self setAssociatedObject:builder];
 }
 
-- (void)remakeConstraints:(void (^)(CPConstraintsBuilder *))block
+- (void)remakeConstraints:(void (^)(CPConstraintsBuilder *builder))block
 {
     CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
     block(builder);
     [builder remake];
+    [self setAssociatedObject:builder];
 }
 
 
-- (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block
+- (void)updateConstraints:(void (^)(CPConstraintsBuilder *builder))block
 {
-    CPConstraintsBuilder *builder = [[CPConstraintsBuilder alloc] initWithView:self];
-    block(builder);
-    [builder update];
+    CPConstraintsBuilder *updateBuilder = [[CPConstraintsBuilder alloc] initWithView:self];
+    block(updateBuilder);
+
+    CPConstraintsBuilder *builder = [self associatedObject];
+    [builder update:updateBuilder];
 }
 
 

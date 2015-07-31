@@ -6,24 +6,10 @@
 //  Copyright (c) 2014 Sung Ahn Kim. All rights reserved.
 //
 
+#import <CPAutoLayout/CPWidthConstraint.h>
+#import <CPAutoLayout/CPHeightConstraint.h>
 #import "CPSizeConstraint.h"
 #import "Masonry.h"
-#import "MASConstraint+Private.h"
-#import "View+CPAutoLayout.h"
-
-
-@interface CPSizeConstraint ()
-
-@property (nonatomic, assign) CGSize size;
-@property (nonatomic, assign) NSLayoutRelation relation;
-
-// relative size
-@property (nonatomic, weak) MAS_VIEW *item;
-@property (nonatomic, assign) CGSize offset;
-@property (nonatomic, assign) CGFloat multiplier;
-
-@end
-
 
 @implementation CPSizeConstraint
 
@@ -31,8 +17,8 @@
 {
     self = [super init];
     if (self) {
-        _size = CGSizeZero;
-        _multiplier = 1.f;
+        _widthConstraint = [[CPWidthConstraint alloc] init];
+        _heightConstraint = [[CPHeightConstraint alloc] init];
     }
     return self;
 }
@@ -41,7 +27,9 @@
 - (CPSizeConstraint *(^)(CGSize size))equalTo
 {
     return ^id (CGSize size) {
-        return self.equalToWithRelation(size, NSLayoutRelationEqual);
+        self.widthConstraint.equalTo(size.width);
+        self.heightConstraint.equalTo(size.height);
+        return self;
     };
 }
 
@@ -49,7 +37,9 @@
 - (CPSizeConstraint *(^)(CGSize size))lessThanOrEqualTo
 {
     return ^id (CGSize size) {
-        return self.equalToWithRelation(size, NSLayoutRelationLessThanOrEqual);
+        self.widthConstraint.lessThanOrEqualTo(size.width);
+        self.heightConstraint.lessThanOrEqualTo(size.height);
+        return self;
     };
 }
 
@@ -57,16 +47,8 @@
 - (CPSizeConstraint *(^)(CGSize size))greaterThanOrEqualTo
 {
     return ^id (CGSize size) {
-        return self.equalToWithRelation(size, NSLayoutRelationGreaterThanOrEqual);
-    };
-}
-
-
-- (CPSizeConstraint *(^)(CGSize size, NSLayoutRelation relation))equalToWithRelation
-{
-    return ^id (CGSize size, NSLayoutRelation relation) {
-        self.size = size;
-        self.relation = relation;
+        self.widthConstraint.greaterThanOrEqualTo(size.width);
+        self.heightConstraint.greaterThanOrEqualTo(size.height);
         return self;
     };
 }
@@ -75,7 +57,9 @@
 - (CPSizeConstraint * (^)(MAS_VIEW *item))equalToItem
 {
     return ^id (MAS_VIEW *item) {
-        return self.equalToItemWithRelation(item, NSLayoutRelationEqual);
+        self.widthConstraint.equalToItem(item);
+        self.heightConstraint.equalToItem(item);
+        return self;
     };
 }
 
@@ -83,7 +67,9 @@
 - (CPSizeConstraint * (^)(MAS_VIEW *item))greaterThanOrEqualToItem
 {
     return ^id (MAS_VIEW *item) {
-        return self.equalToItemWithRelation(item, NSLayoutRelationGreaterThanOrEqual);
+        self.widthConstraint.greaterThanOrEqualToItem(item);
+        self.heightConstraint.greaterThanOrEqualToItem(item);
+        return self;
     };
 }
 
@@ -91,16 +77,8 @@
 - (CPSizeConstraint * (^)(MAS_VIEW *item))lessThanOrEqualToItem
 {
     return ^id (MAS_VIEW *item) {
-        return self.equalToItemWithRelation(item, NSLayoutRelationLessThanOrEqual);
-    };
-}
-
-
-- (CPSizeConstraint * (^)(MAS_VIEW *item, NSLayoutRelation relation))equalToItemWithRelation
-{
-    return ^id (MAS_VIEW *item, NSLayoutRelation relation) {
-        self.item = item;
-        self.relation = relation;
+        self.widthConstraint.lessThanOrEqualToItem(item);
+        self.heightConstraint.lessThanOrEqualToItem(item);
         return self;
     };
 }
@@ -109,7 +87,8 @@
 - (CPSizeConstraint *(^)(CGSize offset))withSizeOffset
 {
     return ^CPSizeConstraint *(CGSize offset) {
-        self.offset = offset;
+        self.widthConstraint.withSizeOffsetX(offset.width);
+        self.heightConstraint.withSizeOffsetY(offset.height);
         return self;
     };
 }
@@ -118,7 +97,7 @@
 - (CPSizeConstraint *(^)(CGFloat offsetX))withSizeOffsetX
 {
     return ^CPSizeConstraint *(CGFloat offsetX) {
-        self.offset = CGSizeMake(offsetX, self.offset.height);
+        self.widthConstraint.withSizeOffsetX(offsetX);
         return self;
     };
 }
@@ -127,7 +106,7 @@
 - (CPSizeConstraint *(^)(CGFloat offsetX))withSizeOffsetY
 {
     return ^CPSizeConstraint *(CGFloat offsetY) {
-        self.offset = CGSizeMake(self.offset.width, offsetY);
+        self.heightConstraint.withSizeOffsetY(offsetY);
         return self;
     };
 }
@@ -135,7 +114,8 @@
 
 - (CPSizeConstraint *(^)(CGFloat multiplier))multipliedBy {
     return ^CPSizeConstraint *(CGFloat multiplier) {
-        self.multiplier = multiplier;
+        self.widthConstraint.multipliedBy(multiplier);
+        self.heightConstraint.multipliedBy(multiplier);
         return self;
     };
 }
@@ -143,20 +123,8 @@
 
 - (void)build:(MASConstraintMaker *)make update:(BOOL)update
 {
-    CGSize size;
-    if (self.item) {
-        make.size.equalToWithRelation(self.item, self.relation).multipliedBy(self.multiplier).sizeOffset(self.offset);
-        size = CGSizeMake(self.item.$width * self.multiplier + self.offset.width, self.item.$height * self.multiplier + self.offset.height);
-    } else {
-        make.width.equalToWithRelation(@(self.size.width), self.relation);
-        make.height.equalToWithRelation(@(self.size.height), self.relation);
-        size = self.size;
-    }
-
-    // set initial 'frame.size'
-    if (!update) {
-        self.target.$size = size;
-    }
+    [self.widthConstraint build:make update:update];
+    [self.heightConstraint build:make update:update];
 }
 
 @end

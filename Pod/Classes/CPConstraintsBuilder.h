@@ -28,10 +28,10 @@
 - (CPSizeConstraint *)size;
 - (CPWidthConstraint *)width;
 - (CPHeightConstraint *)height;
-- (CPInsetsConstraint * (^)(UIEdgeInsets insets))insets;
+- (CPInsetsConstraint * (^)(UIEdgeInsets insets))insets __attribute__((deprecated));
 
 - (void)make;
 - (void)remake;
-- (void)update;
+- (void)update:(CPConstraintsBuilder *)builder;
 
 @end

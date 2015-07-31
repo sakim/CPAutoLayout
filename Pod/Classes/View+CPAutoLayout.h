@@ -14,10 +14,11 @@
 
 @interface MAS_VIEW (CPAutoLayout)
 
-- (void)setConstraints:(void(^)(CPConstraintsBuilder *))block __attribute__((deprecated));
-- (void)makeConstraints:(void(^)(CPConstraintsBuilder *))block;
-- (void)remakeConstraints:(void(^)(CPConstraintsBuilder *))block;
-- (void)updateConstraints:(void(^)(CPConstraintsBuilder *))block;
+- (void)makeConstraints:(void (^)(CPConstraintsBuilder *builder))block;
+- (void)updateConstraints:(void (^)(CPConstraintsBuilder *builder))block;
+
+- (void)setConstraints:(void (^)(CPConstraintsBuilder *builder))block __attribute__((deprecated));
+- (void)remakeConstraints:(void (^)(CPConstraintsBuilder *builder))block; // __attribute__((deprecated));
 
 
 // https://gist.github.com/nfarina/3412730

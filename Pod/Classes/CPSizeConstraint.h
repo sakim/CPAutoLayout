@@ -24,4 +24,9 @@
 - (CPSizeConstraint * (^)(CGFloat offsetY))withSizeOffsetY;
 - (CPSizeConstraint * (^)(CGFloat multiplier))multipliedBy;
 
+
+// internal use
+@property (nonatomic, strong) CPWidthConstraint *widthConstraint;
+@property (nonatomic, strong) CPHeightConstraint *heightConstraint;
+
 @end
