@@ -1,12 +1,12 @@
 PODS:
-  - CPAutoLayout (0.7.0):
+  - CPAutoLayout (0.8.0):
     - Masonry
-  - Expecta (0.3.2)
-  - Expecta+Snapshots (1.3.2):
-    - Expecta (~> 0.3)
-    - FBSnapshotTestCase (= 1.6)
-  - FBSnapshotTestCase (1.6)
-  - Masonry (0.6.1)
+  - Expecta (1.0.2)
+  - Expecta+Snapshots (1.3.4):
+    - Expecta (~> 1.0)
+    - FBSnapshotTestCase (~> 1.8)
+  - FBSnapshotTestCase (1.8.1)
+  - Masonry (0.6.2)
   - Specta (0.2.1)
 
 DEPENDENCIES:
@@ -19,14 +19,14 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   CPAutoLayout:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  CPAutoLayout: 2d5b8aa424ebc7b24f2fbee0357c5fff56ba8d4a
-  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
-  Expecta+Snapshots: 40c5ec43b43da3bae957f14fed5dc9177d08ec8b
-  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
-  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
+  CPAutoLayout: 5fce49e05273d6e54efafa6ebcce701c3ebed26c
+  Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
+  Expecta+Snapshots: ca15bfb57e7a0f78f86c7699c2c54ffacfa4ad2a
+  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   Specta: 15a276a6343867b426d5ed135d5aa4d04123a573
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.37.2

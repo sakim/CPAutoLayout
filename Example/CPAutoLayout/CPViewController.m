@@ -7,12 +7,6 @@
 //
 
 #import "CPViewController.h"
-#import "CPPositionsViewController.h"
-#import "CPAlignmentsViewController.h"
-#import "CPAlignments2ViewController.h"
-#import "CPInsetsViewController.h"
-#import "CPSizeViewController.h"
-
 
 @interface CPViewController ()
 
@@ -27,14 +21,15 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"CPAutoLayout";
-        _titles = @[@"Basic - Positions", @"Basic - Alignments (1)", @"Basic - Alignments (2)", @"Basic - Insets", @"Basic - Size"];
+        self.title = @"Examples";
+        _titles = @[@"Position", @"Alignment", @"Position (Advanced)", @"Fixed Size", @"Relative Size", @"Size by Aspect Ratio"];
         _viewControllers = @[
-                [[CPPositionsViewController alloc] init],
-                [[CPAlignmentsViewController alloc] init],
-                [[CPAlignments2ViewController alloc] init],
-                [[CPInsetsViewController alloc] init],
-                [[CPSizeViewController alloc] init]
+                @"CP_Step1_PositionViewController",
+                @"CP_Step2_AlignmentViewController",
+                @"CP_Step3_PositionAdvancedViewController",
+                @"CP_Step4_FixedSizeViewController",
+                @"CP_Step5_RelativeSizeViewController",
+                @"CP_Step6_AspectRatioViewController"
         ];
     }
 
@@ -68,7 +63,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:_viewControllers[indexPath.row] animated:YES];
+
+    UIViewController *viewController =
+            (UIViewController *) [[NSClassFromString(_viewControllers[indexPath.row]) alloc] init];
+    viewController.title = _titles[indexPath.row];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 

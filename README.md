@@ -1,6 +1,6 @@
 # CPAutoLayout [![Build Status](https://travis-ci.org/sakim/CPAutoLayout.svg?branch=master)](https://travis-ci.org/sakim/CPAutoLayout.svg)
 
-CPAutoLayout is a position-based AutoLayout shorthand. It focuses common use cases of AutoLayout. Easily describe AutoLayout constraints with a position and related size.
+CPAutoLayout is a position-based AutoLayout shorthand. It focuses common use cases of AutoLayout. It is easy to describe AutoLayout constraints with a position and related size.
 
 ## Usage
 
@@ -12,189 +12,229 @@ Even with [Masonry](https://github.com/Masonry/Masonry), all the hard edge compa
 
 ```obj-c
 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        // edge to edge match
-        make.top.equalTo(self.view.mas_top);
-        make.right.equalTo(self.view.mas_right);
-        make.width.equalTo(@(100));
-        make.height.equalTo(@(100));
-    }];
+    // edge to edge match
+    make.top.equalTo(self.view.mas_top);
+    make.right.equalTo(self.view.mas_right);
+    make.width.equalTo(@(100));
+    make.height.equalTo(@(100));
+}];
 ```
 
-With 'CPAutoLayout', you only need to consider position and alignment.
+With 'CPAutoLayout', you only need to consider position and size.
 
 ```obj-c
 [view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentTop|CPAlignmentRight)
-        builder.size.equalTo(CGSizeMake(100, 100));
-    }];
+    builder.position(CPPositionCenter).aligned(CPAlignmentTop|CPAlignmentRight);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
 ```
 
-A lot of examples are ready. To run the example project, clone the repo, and run `pod install` from the Example directory first.
+A lot of examples are ready. To run the example project, clone the repo, and open the project from Example directory.
 
 ### Position & Alignment
 
-![position](https://github.com/sakim/CPAutoLayout/blob/master/images/cpautolayout.jpg?raw=true)
+#### Position
 
-Represent position with CPPosition options.
+![position](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/1_position.png)
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionRight | CPAlignmentTop);
-        ....
-    }];
+// positioned center of its superview
+UIView *centerView = [[UIView alloc] init];
+centerView.backgroundColor = [UIColor firstColor];
+[self.view addSubview:centerView];
+[centerView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
+
+// positioned right of centerView
+UIView *rightView = [[UIView alloc] init];
+rightView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:rightView];
+[rightView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionRight).toItem(centerView);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
+
+// positioned bottom of centerView with distance.
+UIView *bottomView = [[UIView alloc] init];
+bottomView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:bottomView];
+[bottomView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionBottom).toItem(centerView).withOffsetY(10);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
 ```
 
-Position offset is a distance from its anchor point.
+#### Alignment
+
+![alignment](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/2_alignment.png)
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPPositionRight | CPAlignmentTop).withOffsetX(10);
-        ....
-    }];
+// positioned inside of its superview and top-left aligned
+UIView *centerView = [[UIView alloc] init];
+centerView.backgroundColor = [UIColor firstColor];
+[self.view addSubview:centerView];
+[centerView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter).aligned(CPAlignmentTop|CPAlignmentLeft);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
+
+// positioned right of centerView and top aligned
+UIView *rightView = [[UIView alloc] init];
+rightView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:rightView];
+[rightView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionRight).aligned(CPAlignmentTop).toItem(centerView);
+    builder.size.equalTo(CGSizeMake(50, 50));
+}];
+
+// positioned bottom of centerView and left aligned with offset .
+UIView *bottomView = [[UIView alloc] init];
+bottomView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:bottomView];
+[bottomView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionBottom).aligned(CPAlignmentLeft).toItem(centerView).withOffset(CGPointMake(5, 5));
+    builder.size.equalTo(CGSizeMake(50, 50));
+}];
+```
+
+#### Position - Advanced
+
+![position(advanced)](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/3_position_advanced.png)
+
+```obj-c
+// positioned right of centerView and bottom of rightView.
+UIView *bottomView = [[UIView alloc] init];
+bottomView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:bottomView];
+[bottomView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.horizontal(CPPositionRight).toItem(centerView);
+    builder.vertical(CPPositionBottom).toItem(rightView);
+    builder.size.equalTo(CGSizeMake(50, 50));
+}];
 ```
 
 ### Size
 
 #### Fixed Size
 
+![fixed size](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/4_fixed_size.png)
+
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.size.equalTo(CGSizeMake(100, 100));
-    }];
+// 100x100
+[centerView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter);
+    builder.size.equalTo(CGSizeMake(100, 100));
+}];
 ```
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.width.equalTo(100);
-        builder.height.equalTo(100);
-    }];
+// 100x100
+[centerView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter);
+    builder.width.equalTo(100);
+    builder.height.equalTo(100);
+}];
 ```
+
 #### Relative Size
 
-Size equal to a item.
+![relative size](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/5_relative_size.png)
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.size.equalToItem(aView);
-    }];
+// == size of centerView
+UIView *rightView = [[UIView alloc] init];
+rightView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:rightView];
+[rightView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionRight).toItem(centerView).withOffsetX(10);
+    builder.size.equalToItem(centerView);
+}];
+
+// width == width of centerView, height == 50
+UIView *bottomView = [[UIView alloc] init];
+bottomView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:bottomView];
+[bottomView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionBottom).toItem(centerView).withOffsetY(10);
+    builder.width.equalToItem(centerView);
+    builder.height.equalTo(50);
+}];
+
+// == size of centerView * 0.7
+UIView *leftView = [[UIView alloc] init];
+leftView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:leftView];
+[leftView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionLeft).toItem(centerView).withOffsetX(10);
+    builder.size.equalToItem(centerView).multipliedBy(0.7);
+}];
 ```
 
-Width equal to a item's width, and has fixed height.
+#### Aspect Ratio
+
+![aspect ratio](https://raw.githubusercontent.com/sakim/CPAutoLayout/master/images/6_aspect_ratio.png)
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.width.equalToItem(aView);
-        builder.height.equalTo(50);
-    }];
+// 1:0.5
+UIView *centerView = [[UIView alloc] init];
+centerView.backgroundColor = [UIColor firstColor];
+[self.view addSubview:centerView];
+[centerView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter);
+    builder.width.equalTo(100);
+    builder.height.aspectRatio(0.5);
+}];
+self.centerView = centerView;
+
+// 0.7:1
+UIView *rightView = [[UIView alloc] init];
+rightView.backgroundColor = [UIColor secondColor];
+[self.view addSubview:rightView];
+[rightView makeConstraints:^(CPConstraintsBuilder *builder) {
+    builder.position(CPPositionCenter).withOffsetY(-100);
+    builder.width.aspectRatio(0.7);
+    builder.height.equalToItem(centerView);
+}];
 ```
 
-View has always half size to a item.
+### Update Constraints
+
+Update position constraint. Preserve other constraints.
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.size.equalToItem(aView).multipliedBy(.5f);
-    }];
+[self.centerView updateConstraints:^(CPConstraintsBuilder *builder) {
+    builder.vertical(CPPositionCenter); // horizontal position is derived from its previous position.
+}];
 ```
 
-Size offset is size difference to a item.
+Update size constraint. Preserve other constraints.
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.size.equalToItem(aView).withSizeOffset(CGSizeMake(10, 10));
-    }];
+[self.centerView updateConstraints:^(CPConstraintsBuilder *builder) {
+    builder.width.equalTo(100); // height is derived from its previous size.
+}];
 ```
-#### Size with Aspect Ratio
 
-Keep 2:1 aspect ratio.
+### Animate
+
+Call 'layoutIfNeeded' inside of animation block to animate constraints update.
 
 ```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.width.aspectRatio(2);
-        builder.height.equalTo(50);
+[UIView animateWithDuration:0.5 animations:^{
+    [self.centerView updateConstraints:^(CPConstraintsBuilder *builder) {
+        builder.position(CPPositionCenter);
     }];
+    [self.view layoutIfNeeded];
+}];
 ```
-
-Same as,
-
-```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.position(CPAlignmentCenter);
-        builder.width.equalTo(100);
-        builder.height.aspectRatio(.5f);
-    }];
-```
-### Insets
-
-Usually used to represent background view.
-
-```obj-c
-[view makeConstraints:^(CPConstraintsBuilder *builder) {
-        builder.insets(UIEdgeInsetsMake(10, 10, 10, 10));
-    }];
-```
-
 
 ## Installation
 
 CPAutoLayout is available on [CocoaPods](http://cocoapods.org/). Just add the following to your project Podfile:
 
 >`pod 'CPAutoLayout'`
-
-## Versions
-
-#### 0.6.0
-
-Support a horizontal and a vertical position.
-
-* builder.horizontal(CPAlignmentRight).toItem(item);
-* builder.vertical(CPAlignmentBottom).toItem(item);
-
-Rename 'setConstraints:' to 'makeConstraints:'. 'setConstraints:' is remained for backward compatibility.
-
-Add some exceptions to give more reasonable error messages.
-
-#### 0.5.0
-
-Support size by distance. Remove implicit size.
-
-* Added
-    * width.distanceToLeftOf(item): distance between 'position' and left of 'item'.
-    * width.distanceToRightOf(item)
-    * height.distanceToTopOf(item)
-    * height.distanceToBottomOf(item)
-* Removed
-    * builder.toPosition(position)
-
-API changes to clarity. Add 'size' to size related offset.
-
-* CPSizeConstraint: withOffset() > withSizeOffset(), withOffsetX() > withSizeOffsetX(), withOffsetY() > withSizeOffsetY()
-* CPWidthConstraint: withOffsetX() > withSizeOffsetX()
-* CPHeightConstraint: withOffsetY() > withSizeOffsetY()
-
-#### 0.4.2
-
-Fix animation error while updating constraints.
-
-#### 0.4.0
-
-Significant API changes to clarity.
-
-* value() to equalTo(): builder.size.value(...) to builder.size.equalTo(...)
-* toItem() to equalToItem(): builder.size.toItem(...) to builder.size.equalToItem(...)
-* lessThanOrEqualTo(...), greaterThanOrEqualTo(...), lessThanOrEqualToItem(...), greaterThanOrEqualToItem(...)
-* CGSize to CGPoint in position offset.
-
-#### 0.3.3
-
-* Add support lessOrEqual and greaterOrEqual relation.
-* Add support initial 'frame.size'. (experimental)
 
 ## Author
 

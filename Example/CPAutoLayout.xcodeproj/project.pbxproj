@@ -20,12 +20,13 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		6824506C51A4D780A49F0E3F /* CPSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682459FD94CCD3AC3A0BB13A /* CPSizeViewController.m */; };
-		6824507C7207CD1334F60A67 /* CPAlignmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682456B7CDE73EC8FBC0F4DF /* CPAlignmentsViewController.m */; };
-		682454A22D88850ECBAC52F0 /* CPInsetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682455D27AE72A76B3EB556F /* CPInsetsViewController.m */; };
-		682458D4E4F3E66DB5825B28 /* CPAlignments2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824547F42CCA5F08B147EA2 /* CPAlignments2ViewController.m */; };
-		68245CFE9FAC0C2CD0ED2732 /* CPItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682452AC42156B77252A18EF /* CPItemView.m */; };
-		68245F8E453A120EFC464803 /* CPPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68245E7FC2460B767AEDB9AD /* CPPositionsViewController.m */; };
+		682451F7A130FE9E613F4765 /* CP_Step1_PositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682456FF9CF21280B88AF07E /* CP_Step1_PositionViewController.m */; };
+		68245334092F13F736EBD4E2 /* CP_Step4_FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682459528A8EA909D49A32DF /* CP_Step4_FixedSizeViewController.m */; };
+		682454985C5DDDB23D1FD98D /* CP_Step3_PositionAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68245A26544DB524D5F4D05A /* CP_Step3_PositionAdvancedViewController.m */; };
+		6824564BFB6F3B42947C2C29 /* CP_Step6_AspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682456F767C95208C4BCE8D7 /* CP_Step6_AspectRatioViewController.m */; };
+		68245A17944BC36C59459B33 /* CP_Step2_AlignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682456BFC2385003130C2EBD /* CP_Step2_AlignmentViewController.m */; };
+		68245CD49C5057B62B061D89 /* UIColor+CPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68245BC04EB45B68BC1AB800 /* UIColor+CPView.m */; };
+		68245FE5502AAC31062A44ED /* CP_Step5_RelativeSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68245AA371E5329FE8D45240 /* CP_Step5_RelativeSizeViewController.m */; };
 		F623637FD6342926C4BF437A /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F90D5EC0542DDD0850FEB3C9 /* libPods-Tests.a */; };
 		FB2B0F7A24EB937C36E5AAFA /* libPods-CPAutoLayout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FB457F663F077ED3864C2 /* libPods-CPAutoLayout.a */; };
 		FE193E041A18F0A300940CAD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE193E031A18F0A300940CAD /* LaunchScreen.xib */; };
@@ -64,18 +65,20 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		682452AC42156B77252A18EF /* CPItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPItemView.m; sourceTree = "<group>"; };
-		682453669018FB10A3B37B97 /* CPPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPositionsViewController.h; sourceTree = "<group>"; };
-		6824547F42CCA5F08B147EA2 /* CPAlignments2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAlignments2ViewController.m; sourceTree = "<group>"; };
-		682454A93EC1D9363A6B1908 /* CPAlignmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAlignmentsViewController.h; sourceTree = "<group>"; };
-		682455D27AE72A76B3EB556F /* CPInsetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPInsetsViewController.m; sourceTree = "<group>"; };
-		682456B7CDE73EC8FBC0F4DF /* CPAlignmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAlignmentsViewController.m; sourceTree = "<group>"; };
-		682459FD94CCD3AC3A0BB13A /* CPSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSizeViewController.m; sourceTree = "<group>"; };
-		68245AA7DA6A52AD7E1494E4 /* CPInsetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPInsetsViewController.h; sourceTree = "<group>"; };
-		68245B999F4AF21A75F11066 /* CPAlignments2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAlignments2ViewController.h; sourceTree = "<group>"; };
-		68245BAC4FF71470BD7F2FE6 /* CPItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPItemView.h; sourceTree = "<group>"; };
-		68245E7FC2460B767AEDB9AD /* CPPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPositionsViewController.m; sourceTree = "<group>"; };
-		68245EE001CE7DCEEF3C72E2 /* CPSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSizeViewController.h; sourceTree = "<group>"; };
+		682451C9A00412B94FA5B308 /* CP_Step4_FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step4_FixedSizeViewController.h; sourceTree = "<group>"; };
+		6824536B996D99131A7335D3 /* CP_Step1_PositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step1_PositionViewController.h; sourceTree = "<group>"; };
+		682456BFC2385003130C2EBD /* CP_Step2_AlignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step2_AlignmentViewController.m; sourceTree = "<group>"; };
+		682456F767C95208C4BCE8D7 /* CP_Step6_AspectRatioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step6_AspectRatioViewController.m; sourceTree = "<group>"; };
+		682456FF9CF21280B88AF07E /* CP_Step1_PositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step1_PositionViewController.m; sourceTree = "<group>"; };
+		682457041864765FB3316B2B /* CP_Step3_PositionAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step3_PositionAdvancedViewController.h; sourceTree = "<group>"; };
+		682459528A8EA909D49A32DF /* CP_Step4_FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step4_FixedSizeViewController.m; sourceTree = "<group>"; };
+		68245A26544DB524D5F4D05A /* CP_Step3_PositionAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step3_PositionAdvancedViewController.m; sourceTree = "<group>"; };
+		68245AA371E5329FE8D45240 /* CP_Step5_RelativeSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CP_Step5_RelativeSizeViewController.m; sourceTree = "<group>"; };
+		68245BC04EB45B68BC1AB800 /* UIColor+CPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CPView.m"; sourceTree = "<group>"; };
+		68245BC82C14D0E64A72050C /* UIColor+CPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CPView.h"; sourceTree = "<group>"; };
+		68245C607A8E7411E7A67903 /* CP_Step2_AlignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step2_AlignmentViewController.h; sourceTree = "<group>"; };
+		68245DB854DAA1EF70D80138 /* CP_Step5_RelativeSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step5_RelativeSizeViewController.h; sourceTree = "<group>"; };
+		68245FAECD7FEEB137047E2E /* CP_Step6_AspectRatioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CP_Step6_AspectRatioViewController.h; sourceTree = "<group>"; };
 		87399D6A53B815B4ECF911C1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A1B8C8C3E427E9EFD4235228 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B4B98E8363C00056CDFB5892 /* Pods-CPAutoLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPAutoLayout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CPAutoLayout/Pods-CPAutoLayout.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,18 +158,20 @@
 				FE193E031A18F0A300940CAD /* LaunchScreen.xib */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
-				68245E7FC2460B767AEDB9AD /* CPPositionsViewController.m */,
-				682453669018FB10A3B37B97 /* CPPositionsViewController.h */,
-				682452AC42156B77252A18EF /* CPItemView.m */,
-				68245BAC4FF71470BD7F2FE6 /* CPItemView.h */,
-				682456B7CDE73EC8FBC0F4DF /* CPAlignmentsViewController.m */,
-				682454A93EC1D9363A6B1908 /* CPAlignmentsViewController.h */,
-				6824547F42CCA5F08B147EA2 /* CPAlignments2ViewController.m */,
-				68245B999F4AF21A75F11066 /* CPAlignments2ViewController.h */,
-				682455D27AE72A76B3EB556F /* CPInsetsViewController.m */,
-				68245AA7DA6A52AD7E1494E4 /* CPInsetsViewController.h */,
-				682459FD94CCD3AC3A0BB13A /* CPSizeViewController.m */,
-				68245EE001CE7DCEEF3C72E2 /* CPSizeViewController.h */,
+				682456FF9CF21280B88AF07E /* CP_Step1_PositionViewController.m */,
+				6824536B996D99131A7335D3 /* CP_Step1_PositionViewController.h */,
+				68245BC04EB45B68BC1AB800 /* UIColor+CPView.m */,
+				68245BC82C14D0E64A72050C /* UIColor+CPView.h */,
+				68245C607A8E7411E7A67903 /* CP_Step2_AlignmentViewController.h */,
+				682456BFC2385003130C2EBD /* CP_Step2_AlignmentViewController.m */,
+				682457041864765FB3316B2B /* CP_Step3_PositionAdvancedViewController.h */,
+				68245A26544DB524D5F4D05A /* CP_Step3_PositionAdvancedViewController.m */,
+				682459528A8EA909D49A32DF /* CP_Step4_FixedSizeViewController.m */,
+				682451C9A00412B94FA5B308 /* CP_Step4_FixedSizeViewController.h */,
+				68245AA371E5329FE8D45240 /* CP_Step5_RelativeSizeViewController.m */,
+				68245DB854DAA1EF70D80138 /* CP_Step5_RelativeSizeViewController.h */,
+				682456F767C95208C4BCE8D7 /* CP_Step6_AspectRatioViewController.m */,
+				68245FAECD7FEEB137047E2E /* CP_Step6_AspectRatioViewController.h */,
 			);
 			path = CPAutoLayout;
 			sourceTree = "<group>";
@@ -390,12 +395,13 @@
 				6003F59E195388D20070C39A /* CPAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* CPViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				68245F8E453A120EFC464803 /* CPPositionsViewController.m in Sources */,
-				68245CFE9FAC0C2CD0ED2732 /* CPItemView.m in Sources */,
-				6824507C7207CD1334F60A67 /* CPAlignmentsViewController.m in Sources */,
-				682458D4E4F3E66DB5825B28 /* CPAlignments2ViewController.m in Sources */,
-				682454A22D88850ECBAC52F0 /* CPInsetsViewController.m in Sources */,
-				6824506C51A4D780A49F0E3F /* CPSizeViewController.m in Sources */,
+				682451F7A130FE9E613F4765 /* CP_Step1_PositionViewController.m in Sources */,
+				68245CD49C5057B62B061D89 /* UIColor+CPView.m in Sources */,
+				68245A17944BC36C59459B33 /* CP_Step2_AlignmentViewController.m in Sources */,
+				682454985C5DDDB23D1FD98D /* CP_Step3_PositionAdvancedViewController.m in Sources */,
+				68245334092F13F736EBD4E2 /* CP_Step4_FixedSizeViewController.m in Sources */,
+				68245FE5502AAC31062A44ED /* CP_Step5_RelativeSizeViewController.m in Sources */,
+				6824564BFB6F3B42947C2C29 /* CP_Step6_AspectRatioViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
