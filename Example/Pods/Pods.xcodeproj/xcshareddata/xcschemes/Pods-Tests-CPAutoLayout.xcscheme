@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "42A5C39B77A0F5D53B04D13E"
+               BlueprintIdentifier = "D3189603C5932D34145DFDD9"
                BuildableName = "libPods-Tests-CPAutoLayout.a"
                BlueprintName = "Pods-Tests-CPAutoLayout"
                ReferencedContainer = "container:Pods.xcodeproj">

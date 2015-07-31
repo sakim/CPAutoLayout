@@ -9,8 +9,8 @@ target 'Tests', :exclusive => true do
   pod "CPAutoLayout", :path => "../"
   pod 'Masonry'
 
-  pod 'Specta', '~> 0.2.1'
-  pod 'Expecta'
-  pod 'FBSnapshotTestCase'
-  pod 'Expecta+Snapshots'
+  # pod 'Specta', '~> 0.2.1'
+  # pod 'Expecta'
+  # pod 'FBSnapshotTestCase'
+  # pod 'Expecta+Snapshots'
 end
