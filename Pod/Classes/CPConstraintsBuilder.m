@@ -249,7 +249,10 @@
     if (self.horizontalConstraint) [constraints addObject:self.horizontalConstraint];
     if (self.verticalConstraint) [constraints addObject:self.verticalConstraint];
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (self.insetsConstraint) [constraints addObject:self.insetsConstraint];
+#pragma clang diagnostic pop
 
     if (self.sizeConstraint) [constraints addObject:self.sizeConstraint];
     if (self.widthConstraint && ![self.widthConstraint hasAspectRatio]) [constraints addObject:self.widthConstraint];
