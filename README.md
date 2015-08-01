@@ -1,4 +1,7 @@
-# CPAutoLayout [![Build Status](https://travis-ci.org/sakim/CPAutoLayout.svg?branch=master)](https://travis-ci.org/sakim/CPAutoLayout.svg)
+# CPAutoLayout 
+
+[![Build Status](https://img.shields.io/travis/sakim/CPAutoLayout.svg?style=flat-square)](https://travis-ci.org/sakim/CPAutoLayout)
+[![CocoaPods](https://img.shields.io/cocoapods/v/CPAutoLayout.svg?style=flat-square)](https://cocoapods.org/pods/CPAutoLayout)
 
 CPAutoLayout is a position-based AutoLayout shorthand. It focuses common use cases of AutoLayout. It is easy to describe AutoLayout constraints with a position and related size.
 
